@@ -3,13 +3,13 @@
  * @brief Useful string subroutines
  */
 
-#ifndef EPYX_STRING_H
-#define EPYX_STRING_H
+#ifndef MODAL_STRING_H
+#define MODAL_STRING_H
 
 #include <ctype.h>
 #include <string>
 
-namespace Epyx
+namespace Modal
 {
     /**
      * @class String
@@ -102,4 +102,4 @@ namespace Epyx
     };
 }
 
-#endif /* EPYX_STRING_H */
+#endif /* MODAL_STRING_H */

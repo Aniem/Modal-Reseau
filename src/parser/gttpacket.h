@@ -3,15 +3,15 @@
  * @brief Packet of the Generic Text Template
  */
 
-#ifndef EPYX_GTTPACKET_H
-#define EPYX_GTTPACKET_H
+#ifndef MODAL_GTTPACKET_H
+#define MODAL_GTTPACKET_H
 
 #include <map>
 #include <string>
 #include <ostream>
 #include "../net/socket.h"
 
-namespace Epyx
+namespace Modal
 {
     /**
      * @class GTTPacket
@@ -67,4 +67,4 @@ namespace Epyx
     };
 }
 
-#endif /* EPYX_GTTPACKET_H */
+#endif /* MODAL_GTTPACKET_H */

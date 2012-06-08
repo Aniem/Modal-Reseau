@@ -5,13 +5,13 @@
  * It is not exposing the full pthread capabilities on purpose to make it
  * simpler even if it might create small overheads
  */
-#ifndef EPYX_CONDITION_H
-#define EPYX_CONDITION_H
+#ifndef MODAL_CONDITION_H
+#define MODAL_CONDITION_H
 
 #include <pthread.h>
 #include "mutex.h"
 
-namespace Epyx
+namespace Modal
 {
     /**
      * @class Condition
@@ -119,4 +119,4 @@ namespace Epyx
     };
 }
 
-#endif /* EPYX_CONDITION_H */
+#endif /* MODAL_CONDITION_H */

@@ -3,13 +3,13 @@
  * @brief Template part of atom::map
  */
 
-#ifndef EPYX_ATOM_MAP_DETAIL_H
-#define EPYX_ATOM_MAP_DETAIL_H
+#ifndef MODAL_ATOM_MAP_DETAIL_H
+#define MODAL_ATOM_MAP_DETAIL_H
 
 #include "../assert.h"
 #include "../log.h"
 
-namespace Epyx
+namespace Modal
 {
     namespace atom
     {
@@ -36,7 +36,7 @@ namespace Epyx
         template <typename TKey, typename TVal>
         TVal Map<TKey, TVal>::getAndLock(TKey key, TVal defval) {
             mut.lock();
-#if EPYX_ATOM_MAP_DEBUG
+#if MODAL_ATOM_MAP_DEBUG
             log::debug << "Mutex " << this << " !lock" << log::endl;
 #endif
             const_iterator it = map.find(key);
@@ -47,7 +47,7 @@ namespace Epyx
         template <typename TKey, typename TVal>
         TVal Map<TKey, TVal>::get(TKey key, TVal defval) {
             TVal retval = this->getAndLock(key, defval);
-#if EPYX_ATOM_MAP_DEBUG
+#if MODAL_ATOM_MAP_DEBUG
             log::debug << "Mutex " << this << " !unlock (get)" << log::endl;
 #endif
             mut.unlock();
@@ -118,7 +118,7 @@ namespace Epyx
         template <typename TKey, typename TVal>
         typename Map<TKey, TVal>::iterator Map<TKey, TVal>::beginLock() {
             mut.lock();
-#if EPYX_ATOM_MAP_DEBUG
+#if MODAL_ATOM_MAP_DEBUG
             log::debug << "Mutex " << this << " !lock (iter)" << log::endl;
 #endif
             return map.begin();
@@ -131,7 +131,7 @@ namespace Epyx
 
         template <typename TKey, typename TVal>
         void Map<TKey, TVal>::endUnlock() {
-#if EPYX_ATOM_MAP_DEBUG
+#if MODAL_ATOM_MAP_DEBUG
             log::debug << "Mutex " << this << " !unlock" << log::endl;
 #endif
             mut.unlock();
@@ -140,5 +140,5 @@ namespace Epyx
     }
 }
 
-#endif /* EPYX_ATOM_MAP_DETAIL_H */
+#endif /* MODAL_ATOM_MAP_DETAIL_H */
 

@@ -3,14 +3,14 @@
  * @brief Definition of the actor class that will need to be extended to mae your own actors
  */
 
-#ifndef EPYX_CORE_ACTOR_H
-#define EPYX_CORE_ACTOR_H
+#ifndef MODAL_CORE_ACTOR_H
+#define MODAL_CORE_ACTOR_H
 
 #include "actor-base.h"
 #include "actor-manager.h"
 
 #include "common.h"
-namespace Epyx
+namespace Modal
 {
     template<typename T>struct ActorId;
 
@@ -80,4 +80,4 @@ namespace Epyx
         this->self.manager->post(this->self.id, NULL);//Send a message to make sure the actor is destroyed
     }
 }
-#endif //EPYX_CORE_ACTOR_H
+#endif //MODAL_CORE_ACTOR_H

@@ -1,7 +1,7 @@
 #include "log.h"
 #include <string>
 
-namespace Epyx
+namespace Modal
 {
 namespace log
 {
@@ -11,7 +11,7 @@ namespace log
         if (!file.empty() && (this->flags & LOGFILE)) {
             //TODO: Close it
             this->logFile.open(file.c_str());
-            EPYX_ASSERT_NO_LOG(logFile.is_open())
+            MODAL_ASSERT_NO_LOG(logFile.is_open())
         }
         // start thread
         this->start();

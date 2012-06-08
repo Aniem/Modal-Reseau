@@ -3,12 +3,12 @@
  * @brief HTTP Parser
  */
 
-#ifndef EPYX_HTTPPARSER_H
-#define EPYX_HTTPPARSER_H
+#ifndef MODAL_HTTPPARSER_H
+#define MODAL_HTTPPARSER_H
 
 #include "gttparser.h"
 
-namespace Epyx
+namespace Modal
 {
     /**
      * @class HTTPParser
@@ -34,5 +34,5 @@ namespace Epyx
     };
 }
 
-#endif /* EPYX_HTTPPARSER_H */
+#endif /* MODAL_HTTPPARSER_H */
 

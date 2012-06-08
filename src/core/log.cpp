@@ -3,7 +3,7 @@
 #include <errno.h>
 #include <cstring>
 
-namespace Epyx {
+namespace Modal {
 namespace log {
 
     Worker* _worker = NULL;
@@ -17,7 +17,7 @@ namespace log {
     }
 
     void init(int flags, const std::string& file){
-        EPYX_ASSERT_NO_LOG(Thread::isInitialized());
+        MODAL_ASSERT_NO_LOG(Thread::isInitialized());
         _worker = new Worker(flags, file);
         _buffers = new TLSPointer<BufferContainer>(create_buffers);
         initialized = true;
@@ -39,7 +39,7 @@ namespace log {
     Stream::~Stream(){}
 
     Stream& Stream::operator<<(const EndlStruct& f) {
-        EPYX_ASSERT_NO_LOG(log::initialized);
+        MODAL_ASSERT_NO_LOG(log::initialized);
         std::ostringstream* buffer = &_buffers->get()->b[this->priority];
         _worker->write(buffer->str(), this->priority);
         buffer->str("");
@@ -47,7 +47,7 @@ namespace log {
     }
 
     Stream& Stream::operator<<(const ErrstdStruct& f) {
-        EPYX_ASSERT_NO_LOG(log::initialized);
+        MODAL_ASSERT_NO_LOG(log::initialized);
         int err_code = errno;
         static Mutex strerrorMutex;
         strerrorMutex.lock();

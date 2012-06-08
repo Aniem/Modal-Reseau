@@ -3,15 +3,15 @@
  * @brief Generic Text Template implementation
  */
 
-#ifndef EPYX_GTTPARSER_H
-#define EPYX_GTTPARSER_H
+#ifndef MODAL_GTTPARSER_H
+#define MODAL_GTTPARSER_H
 
 #include "gttpacket.h"
 #include "lineparser.h"
 #include <ctype.h>
 #include <string>
 
-namespace Epyx
+namespace Modal
 {
     /**
      * @class GTTParser
@@ -100,5 +100,5 @@ namespace Epyx
     };
 }
 
-#endif /* EPYX_GTTPARSER_H */
+#endif /* MODAL_GTTPARSER_H */
 

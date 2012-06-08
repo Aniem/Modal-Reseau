@@ -1,53 +1,53 @@
 /**
  * @file assert.h
- * @brief Assert() macro implementation with Epyx logger
+ * @brief Assert() macro implementation with Modal logger
  *
  * You need to include log.h and exception.h to use this file
  */
-#ifndef EPYX_ASSERT_H
-#define EPYX_ASSERT_H
+#ifndef MODAL_ASSERT_H
+#define MODAL_ASSERT_H
 
 #include <iostream>
 
 /**
- * @def EPYX_ASSERT(condition)
- * An assert using Epyx' logging system.
+ * @def MODAL_ASSERT(condition)
+ * An assert using Modal' logging system.
  */
-#define EPYX_ASSERT(condition)\
+#define MODAL_ASSERT(condition)\
 {\
     if(!(bool)(condition)){\
-        Epyx::log::fatal << "\n[ASSERT] " #condition "\n";\
-        Epyx::log::fatal << "    - Function: " << __FUNCTION__ << " \n";\
-        Epyx::log::fatal << "    - File: " << __FILE__ << " : " << __LINE__ << Epyx::log::endl;\
-        throw Epyx::FailException("assert", #condition);\
+        Modal::log::fatal << "\n[ASSERT] " #condition "\n";\
+        Modal::log::fatal << "    - Function: " << __FUNCTION__ << " \n";\
+        Modal::log::fatal << "    - File: " << __FILE__ << " : " << __LINE__ << Modal::log::endl;\
+        throw Modal::FailException("assert", #condition);\
     }\
 }
 
 /**
- * @def EPYX_ASSERT_WARN(condition)
- * An assert using Epyx' logging system. It does not throw an exception thus it only warns about the error.
+ * @def MODAL_ASSERT_WARN(condition)
+ * An assert using Modal' logging system. It does not throw an exception thus it only warns about the error.
  */
-#define EPYX_ASSERT_WARN(condition)\
+#define MODAL_ASSERT_WARN(condition)\
 {\
     if(!(bool)(condition)){\
-        Epyx::log::fatal << "\n[ASSERT] " #condition "\n";\
-        Epyx::log::fatal << "    - Function: " << __FUNCTION__ << " \n";\
-        Epyx::log::fatal << "    - File: " << __FILE__ << " : " << __LINE__ << Epyx::log::endl;\
+        Modal::log::fatal << "\n[ASSERT] " #condition "\n";\
+        Modal::log::fatal << "    - Function: " << __FUNCTION__ << " \n";\
+        Modal::log::fatal << "    - File: " << __FILE__ << " : " << __LINE__ << Modal::log::endl;\
     }\
 }
 
 /**
- * @def EPYX_ASSERT_NO_LOG(condition)
- * An assert that does not use Epyx' logging system (for use in the logging system).
+ * @def MODAL_ASSERT_NO_LOG(condition)
+ * An assert that does not use Modal' logging system (for use in the logging system).
  */
-#define EPYX_ASSERT_NO_LOG(condition)\
+#define MODAL_ASSERT_NO_LOG(condition)\
 {\
     if(!(bool)(condition)){\
         std::cerr << "[ASSERT] " #condition "\n";\
         std::cerr << "    - Function: " << __FUNCTION__ << " \n";\
         std::cerr << "    - File: " << __FILE__ << " : " << __LINE__ << std::endl;\
-        throw Epyx::FailException("assert", #condition);\
+        throw Modal::FailException("assert", #condition);\
     }\
 }
 
-#endif /* EPYX_ASSERT_H */
+#endif /* MODAL_ASSERT_H */

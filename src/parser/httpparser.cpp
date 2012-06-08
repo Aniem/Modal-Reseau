@@ -2,11 +2,11 @@
 #include "../core/common.h"
 #include <string.h>
 
-namespace Epyx
+namespace Modal
 {
     void HTTPParser::parseFirstLine(const std::string& line) {
         const char *l = line.c_str();
-        EPYX_ASSERT(line.length() != 0);
+        MODAL_ASSERT(line.length() != 0);
 
         // Read HTTP version
         int i = 0;
@@ -41,7 +41,7 @@ namespace Epyx
     void HTTPParser::parseHeaderLine(const std::string& line) {
         const char *l = line.c_str();
         int i = 0, iValue = 0;
-        EPYX_ASSERT(line.length() != 0);
+        MODAL_ASSERT(line.length() != 0);
 
         // Read flag name
         if (!isalpha(l[i]))

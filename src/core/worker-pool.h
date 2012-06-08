@@ -2,15 +2,15 @@
  * @file worker-pool.h
  * @brief a worker pool definition.
  */
-#ifndef EPYX_WORKER_POOL_H
-#define EPYX_WORKER_POOL_H
+#ifndef MODAL_WORKER_POOL_H
+#define MODAL_WORKER_POOL_H
 
 #include <list>
 #include <string>
 #include <sstream>
 #include "common.h"
 
-namespace Epyx
+namespace Modal
 {
     /**
      * @class WorkerPool
@@ -126,4 +126,4 @@ namespace Epyx
 
 #include "worker-pool-detail.h"
 
-#endif /* EPYX_WORKER_POOL_H */
+#endif /* MODAL_WORKER_POOL_H */

@@ -3,12 +3,12 @@
  * @brief Parse a stream line by line
  */
 
-#ifndef EPYX_LINEPARSER_H
-#define EPYX_LINEPARSER_H
+#ifndef MODAL_LINEPARSER_H
+#define MODAL_LINEPARSER_H
 
 #include <string>
 
-namespace Epyx
+namespace Modal
 {
 
     /**
@@ -67,4 +67,4 @@ namespace Epyx
     };
 }
 
-#endif /* EPYX_LINEPARSER_H */
+#endif /* MODAL_LINEPARSER_H */

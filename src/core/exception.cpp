@@ -5,7 +5,7 @@
 #include <string.h>
 #include <sstream>
 
-namespace Epyx
+namespace Modal
 {
 
     Exception::Exception(const char *type, const char *module,
@@ -26,7 +26,7 @@ namespace Epyx
     }
 
     FailException::FailException(const char *module, const char *message)
-    :Exception("Epyx fails", module, message) {
+    :Exception("Modal fails", module, message) {
     }
 
     ErrException::ErrException(const char *module, const char *fct)
@@ -38,7 +38,7 @@ namespace Epyx
     }
 
     MinorException::MinorException(const char *module, const char* message)
-    :Exception("Internal Epyx error", module, message) {
+    :Exception("Internal Modal error", module, message) {
     }
 
     ParserException::ParserException(const char *module, const char* message)

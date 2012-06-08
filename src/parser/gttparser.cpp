@@ -2,7 +2,7 @@
 #include "../core/common.h"
 #include <string.h>
 
-namespace Epyx
+namespace Modal
 {
 
     GTTParser::GTTParser()
@@ -42,7 +42,7 @@ namespace Epyx
     }
 
     void GTTParser::eat(const char *data, long size) {
-        EPYX_ASSERT(data != NULL && size > 0);
+        MODAL_ASSERT(data != NULL && size > 0);
         lineParser.push(data, size);
     }
 
@@ -137,7 +137,7 @@ namespace Epyx
     void GTTParser::parseHeaderLine(const std::string& line) {
         const char *l = line.c_str();
         int i = 0, iValue = 0;
-        EPYX_ASSERT(line.length() != 0);
+        MODAL_ASSERT(line.length() != 0);
 
         // Read flag name
         if (!isalpha(l[i]))

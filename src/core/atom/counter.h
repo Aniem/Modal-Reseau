@@ -3,12 +3,12 @@
  * @brief Atomic counter management
  */
 
-#ifndef EPYX_ATOM_COUNTER_H
-#define EPYX_ATOM_COUNTER_H
+#ifndef MODAL_ATOM_COUNTER_H
+#define MODAL_ATOM_COUNTER_H
 
 #include "../mutex.h"
 
-namespace Epyx
+namespace Modal
 {
     namespace atom
     {
@@ -48,5 +48,5 @@ namespace Epyx
     }
 }
 
-#endif /* EPYX_ATOM_COUNTER_H */
+#endif /* MODAL_ATOM_COUNTER_H */
 

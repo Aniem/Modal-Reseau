@@ -3,14 +3,14 @@
  * @brief Implementation of the actor framework (templated part)
  */
 
-#ifndef EPYX_CORE_ACTOR_MANAGER_DETAIL_H
-#define EPYX_CORE_ACTOR_MANAGER_DETAIL_H
+#ifndef MODAL_CORE_ACTOR_MANAGER_DETAIL_H
+#define MODAL_CORE_ACTOR_MANAGER_DETAIL_H
 
-namespace Epyx
+namespace Modal
 {
 
     template<typename T> ActorId<T> ActorManager::add(Actor<T>* a) {
-        EPYX_ASSERT(a != NULL);
+        MODAL_ASSERT(a != NULL);
         return this->add(*a);
     }
 
@@ -27,7 +27,7 @@ namespace Epyx
     }
 
     template<typename T> ActorId<T> ActorManager::add(Actor<T>* a, Timeout t) {
-        EPYX_ASSERT(a != NULL);
+        MODAL_ASSERT(a != NULL);
         return this->add(*a, t);
     }
 
@@ -58,4 +58,4 @@ namespace Epyx
 
 }
 
-#endif /* EPYX_CORE_ACTOR_MANAGER_DETAIL_H */
+#endif /* MODAL_CORE_ACTOR_MANAGER_DETAIL_H */

@@ -2,8 +2,8 @@
  * @file common.h
  * @brief This header file includes all the files in core
  */
-#ifndef EPYX_CORE_COMMON_H
-#define EPYX_CORE_COMMON_H
+#ifndef MODAL_CORE_COMMON_H
+#define MODAL_CORE_COMMON_H
 
 #include <unistd.h>
 #include "assert.h"
@@ -18,4 +18,4 @@
 #include "thread.h"
 #include "worker-pool.h"
 
-#endif /* EPYX_CORE_COMMON_H */
+#endif /* MODAL_CORE_COMMON_H */

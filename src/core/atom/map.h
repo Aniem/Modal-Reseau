@@ -3,20 +3,20 @@
  * @brief Thread-safe map
  */
 
-#ifndef EPYX_ATOM_MAP_H
-#define EPYX_ATOM_MAP_H
+#ifndef MODAL_ATOM_MAP_H
+#define MODAL_ATOM_MAP_H
 
 #include "../mutex.h"
 #include <map>
 
-#ifndef EPYX_ATOM_MAP_DEBUG
+#ifndef MODAL_ATOM_MAP_DEBUG
 /**
  * @brief atom::Map debug
  */
-#define EPYX_ATOM_MAP_DEBUG 0
+#define MODAL_ATOM_MAP_DEBUG 0
 #endif
 
-namespace Epyx
+namespace Modal
 {
     namespace atom
     {
@@ -141,5 +141,5 @@ namespace Epyx
 
 #include "map-detail.h"
 
-#endif /* EPYX_ATOM_MAP_H */
+#endif /* MODAL_ATOM_MAP_H */
 

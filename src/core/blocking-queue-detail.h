@@ -4,10 +4,10 @@
  *
  * You should never include this file directly
  */
-#ifndef EPYX_BLOCKING_QUEUE_DETAIL_H
-#define EPYX_BLOCKING_QUEUE_DETAIL_H
+#ifndef MODAL_BLOCKING_QUEUE_DETAIL_H
+#define MODAL_BLOCKING_QUEUE_DETAIL_H
 
-namespace Epyx
+namespace Modal
 {
 
     template<typename T> BlockingQueue<T>::BlockingQueue()
@@ -140,4 +140,4 @@ namespace Epyx
     }
 }
 
-#endif /* EPYX_BLOCKING_QUEUE_DETAIL_H */
+#endif /* MODAL_BLOCKING_QUEUE_DETAIL_H */

@@ -6,7 +6,7 @@
 #include <errno.h>
 #include <algorithm>
 
-namespace Epyx
+namespace Modal
 {
     const char String::spaces[] = " \t\n\v\f\r";
     const char String::crlf[] = "\r\n";
@@ -44,7 +44,7 @@ namespace Epyx
     long String::toInt(const char* str) {
         char *endptr = NULL;
         long l = strtol(str, &endptr, 10);
-        EPYX_ASSERT(endptr != NULL);
+        MODAL_ASSERT(endptr != NULL);
         if (*endptr == '\0')
             return l;
 

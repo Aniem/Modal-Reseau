@@ -2,13 +2,13 @@
 #include "assert.h"
 #include "log.h"
 
-namespace Epyx
+namespace Modal
 {
 
     Timeout::Timeout(unsigned int ms) {
         struct timeval tv;
         int gettimeofday_status = gettimeofday(&tv, NULL);
-        EPYX_ASSERT(gettimeofday_status == 0);
+        MODAL_ASSERT(gettimeofday_status == 0);
 
         long usec = tv.tv_usec + (1000 * ms);
         maxTime.tv_usec = usec % 1000000;
@@ -18,7 +18,7 @@ namespace Epyx
     bool Timeout::hasExpired() const {
         struct timeval tv;
         int gettimeofday_status = gettimeofday(&tv, NULL);
-        EPYX_ASSERT(gettimeofday_status == 0);
+        MODAL_ASSERT(gettimeofday_status == 0);
 
         return (tv.tv_sec > maxTime.tv_sec) ||
             (tv.tv_sec == maxTime.tv_sec && tv.tv_usec > maxTime.tv_usec);
@@ -27,7 +27,7 @@ namespace Epyx
     struct timeval Timeout::remainingTimeval() const {
         struct timeval tv;
         int gettimeofday_status = gettimeofday(&tv, NULL);
-        EPYX_ASSERT(gettimeofday_status == 0);
+        MODAL_ASSERT(gettimeofday_status == 0);
 
         if (tv.tv_sec > maxTime.tv_sec) {
             // Timeout in seconds

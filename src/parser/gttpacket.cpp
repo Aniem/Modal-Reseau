@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string.h>
 
-namespace Epyx
+namespace Modal
 {
 
     GTTPacket::GTTPacket()
@@ -29,7 +29,7 @@ namespace Epyx
     }
 
     unsigned long GTTPacket::build(char **newData) const {
-        EPYX_ASSERT(newData != NULL);
+        MODAL_ASSERT(newData != NULL);
         std::stringstream head;
         std::map<std::string, std::string>::const_iterator it;
 

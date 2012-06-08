@@ -5,7 +5,7 @@
 
 #include "actor-base.h"
 
-namespace Epyx
+namespace Modal
 {
 
     Actor_base::Actor_base() {

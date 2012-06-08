@@ -2,8 +2,8 @@
  * @file log-worker.h
  * @brief Used for the implementation of the logger
  */
-#ifndef EPYX_LOG_WORKER_H
-#define EPYX_LOG_WORKER_H
+#ifndef MODAL_LOG_WORKER_H
+#define MODAL_LOG_WORKER_H
 
 #include <fstream>
 #include <string>
@@ -11,7 +11,7 @@
 #include "blocking-queue.h"
 #include "condition.h"
 
-namespace Epyx
+namespace Modal
 {
 namespace log
 {
@@ -50,4 +50,4 @@ namespace log
 }
 }
 
-#endif /* EPYX_LOG_WORKER_H */
+#endif /* MODAL_LOG_WORKER_H */

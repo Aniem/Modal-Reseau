@@ -2,14 +2,14 @@
  * @file thread.h
  * @brief Thread management astraction layer
  */
-#ifndef EPYX_THREAD_H
-#define EPYX_THREAD_H
+#ifndef MODAL_THREAD_H
+#define MODAL_THREAD_H
 
 #include <string>
 #include <pthread.h>
 #include "tls-pointer.h"
 
-namespace Epyx
+namespace Modal
 {
     namespace detail
     {
@@ -124,4 +124,4 @@ namespace Epyx
     };
 }
 
-#endif /* EPYX_THREAD_H */
+#endif /* MODAL_THREAD_H */

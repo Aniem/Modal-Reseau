@@ -2,7 +2,7 @@
 #include "../core/common.h"
 #include <string.h>
 
-namespace Epyx
+namespace Modal
 {
 
     LineParser::LineParser()
@@ -19,11 +19,11 @@ namespace Epyx
             buffer = NULL;
             bufsize = 0;
         }
-        EPYX_ASSERT(bufsize == 0);
+        MODAL_ASSERT(bufsize == 0);
     }
 
     void LineParser::push(const char* data, long size) {
-        EPYX_ASSERT(data != NULL && size > 0);
+        MODAL_ASSERT(data != NULL && size > 0);
 
         // Append data to inernal buffer
         if (buffer != NULL) {
@@ -59,7 +59,7 @@ namespace Epyx
     }
 
     bool LineParser::popData(char *data, long size) {
-        EPYX_ASSERT(data != NULL && size > 0);
+        MODAL_ASSERT(data != NULL && size > 0);
 
         // Not enough bytes in the buffer
         if (size > bufsize)
@@ -72,7 +72,7 @@ namespace Epyx
     }
 
     void LineParser::skip(long n) {
-        EPYX_ASSERT(0 < n && n <= bufsize);
+        MODAL_ASSERT(0 < n && n <= bufsize);
         if (n == bufsize) {
             delete[] buffer;
             buffer = NULL;

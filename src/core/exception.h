@@ -1,17 +1,17 @@
 /**
  * @file exception.h
- * @brief Epyx exceptions
+ * @brief Modal exceptions
  */
-#ifndef EPYX_EXCEPTION_H
-#define EPYX_EXCEPTION_H
+#ifndef MODAL_EXCEPTION_H
+#define MODAL_EXCEPTION_H
 
 #include <string>
 
-namespace Epyx
+namespace Modal
 {
     /**
      * @class Exception
-     * @brief Epyx raw exception
+     * @brief Modal raw exception
      */
     class Exception
     {
@@ -60,13 +60,13 @@ namespace Epyx
     };
     /**
      * @class FailException
-     * @brief Epyx failure
+     * @brief Modal failure
      */
     class FailException : public Exception
     {
     public:
         /**
-         * @brief Build an "Epyx fails" exception
+         * @brief Build an "Modal fails" exception
          * @param module
          * @param message
          */
@@ -88,13 +88,13 @@ namespace Epyx
     };
     /**
      * @class MinorException
-     * @brief Internal Epyx exception (meant to be caught at some point)
+     * @brief Internal Modal exception (meant to be caught at some point)
      */
     class MinorException : public Exception
     {
     public:
         /**
-         * @brief Build an internal Epyx exception
+         * @brief Build an internal Modal exception
          * @param module
          * @param message error message to be logged
          */
@@ -116,4 +116,4 @@ namespace Epyx
     };
 }
 
-#endif /* EPYX_EXCEPTION_H */
+#endif /* MODAL_EXCEPTION_H */

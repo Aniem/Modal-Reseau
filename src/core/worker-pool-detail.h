@@ -4,10 +4,10 @@
  *
  * You should never include this file directly
  */
-#ifndef EPYX_WORKER_POOL_DETAIL_H
-#define EPYX_WORKER_POOL_DETAIL_H
+#ifndef MODAL_WORKER_POOL_DETAIL_H
+#define MODAL_WORKER_POOL_DETAIL_H
 
-namespace Epyx
+namespace Modal
 {
 
     template<typename T> WorkerPool<T>::WorkerPool(int num_workers,
@@ -47,13 +47,13 @@ namespace Epyx
     }
 
     template<typename T> void WorkerPool<T>::post(T *message) {
-        EPYX_ASSERT(message != NULL);
+        MODAL_ASSERT(message != NULL);
         this->bookKeep();
         this->messages.push(message);
     }
 
     template<typename T> void WorkerPool<T>::setName(const std::string& name) {
-        EPYX_ASSERT(this->name.empty());
+        MODAL_ASSERT(this->name.empty());
         this->name = name;
     }
 
@@ -62,7 +62,7 @@ namespace Epyx
     }
 
     template<typename T> void WorkerPool<T>::setNumWorkers(int n) {
-        EPYX_ASSERT(n >= 0);
+        MODAL_ASSERT(n >= 0);
         if (this->worker_count > n) {
             int to_remove = this->worker_count - n;
             for (int i = 0; i < to_remove; i++) {
@@ -146,4 +146,4 @@ namespace Epyx
     }
 }
 
-#endif /* EPYX_WORKER_POOL_DETAIL_H */
+#endif /* MODAL_WORKER_POOL_DETAIL_H */

@@ -7,7 +7,7 @@
 
 #include "common.h"
 
-namespace Epyx
+namespace Modal
 {
 
     ActorManager::ActorManager(int num_workers, const std::string& name) :

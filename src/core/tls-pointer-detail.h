@@ -4,13 +4,13 @@
  *
  * You should never include this file directly
  */
-#ifndef EPYX_TLS_POINTER_DETAIL_H
-#define EPYX_TLS_POINTER_DETAIL_H
+#ifndef MODAL_TLS_POINTER_DETAIL_H
+#define MODAL_TLS_POINTER_DETAIL_H
 
 #include "tls-pointer.h"
 
 
-namespace Epyx
+namespace Modal
 {
 
     template<typename T> void TLSPointer<T>::_default_destructor(T* object) {
@@ -21,14 +21,14 @@ namespace Epyx
     : destructor(destructor), constructor(NULL) {
         int key_create_status = pthread_key_create(&key,
                 reinterpret_cast<void_destructor_func*> (this->destructor));
-        EPYX_ASSERT_NO_LOG(key_create_status == 0);
+        MODAL_ASSERT_NO_LOG(key_create_status == 0);
     }
 
     template<typename T> TLSPointer<T>::TLSPointer(T* (*constructor_)(), void (*destructor_)(T*))
     : destructor(destructor_), constructor(constructor_) {
         int key_create_status = pthread_key_create(&key,
                 reinterpret_cast<void_destructor_func*> (this->destructor));
-        EPYX_ASSERT_NO_LOG(key_create_status == 0);
+        MODAL_ASSERT_NO_LOG(key_create_status == 0);
     }
 
     template<typename T> TLSPointer<T>::~TLSPointer() {
@@ -64,4 +64,4 @@ namespace Epyx
     }
 }
 
-#endif /* EPYX_TLS_POINTER_DETAIL_H */
+#endif /* MODAL_TLS_POINTER_DETAIL_H */

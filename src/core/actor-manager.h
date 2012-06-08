@@ -3,8 +3,8 @@
  * @brief Definition of the actor framework
  */
 
-#ifndef EPYX_CORE_ACTOR_MANAGER_H
-#define EPYX_CORE_ACTOR_MANAGER_H
+#ifndef MODAL_CORE_ACTOR_MANAGER_H
+#define MODAL_CORE_ACTOR_MANAGER_H
 
 #include "actor.h"
 #include "actor-base.h"
@@ -16,7 +16,7 @@
 #include <map>
 #include <vector>
 
-namespace Epyx
+namespace Modal
 {
 
     struct ActorId_base;
@@ -187,4 +187,4 @@ namespace Epyx
 }
 #include "actor-manager-detail.h"
 
-#endif /* EPYX_CORE_ACTOR_MANAGER_H */
+#endif /* MODAL_CORE_ACTOR_MANAGER_H */

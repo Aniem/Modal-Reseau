@@ -1,6 +1,6 @@
 #include "counter.h"
 
-namespace Epyx
+namespace Modal
 {
     namespace atom
     {

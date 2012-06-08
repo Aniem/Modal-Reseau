@@ -2,12 +2,12 @@
  * @file actor-base.h
  * @brief Definition of the base class of the actors, do not use directly
  */
-#ifndef EPYX_CORE_ACTOR_BASE_H
-#define EPYX_CORE_ACTOR_BASE_H
+#ifndef MODAL_CORE_ACTOR_BASE_H
+#define MODAL_CORE_ACTOR_BASE_H
 
 #include "mutex.h"
 
-namespace Epyx
+namespace Modal
 {
     class ActorManager;
 
@@ -42,4 +42,4 @@ namespace Epyx
 
     };
 }
-#endif //EPYX_CORE_ACTOR_BASE_H
+#endif //MODAL_CORE_ACTOR_BASE_H

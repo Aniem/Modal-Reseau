@@ -3,12 +3,12 @@
  * @brief Millisecond timeout
  */
 
-#ifndef EPYX_TIMEOUT_H
-#define EPYX_TIMEOUT_H
+#ifndef MODAL_TIMEOUT_H
+#define MODAL_TIMEOUT_H
 
 #include <sys/time.h>
 
-namespace Epyx
+namespace Modal
 {
     /**
      * @class Timeout
@@ -52,5 +52,5 @@ namespace Epyx
     };
 }
 
-#endif /* EPYX_TIMEOUT_H */
+#endif /* MODAL_TIMEOUT_H */
 

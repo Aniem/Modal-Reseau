@@ -2,13 +2,13 @@
  * @file mutex.h
  * @brief mutex definition.
  */
-#ifndef EPYX_MUTEX_H
-#define EPYX_MUTEX_H
+#ifndef MODAL_MUTEX_H
+#define MODAL_MUTEX_H
 
 #include <pthread.h>
 #include <errno.h>
 
-namespace Epyx
+namespace Modal
 {
     /**
      * @class Mutex
@@ -63,4 +63,4 @@ namespace Epyx
 
 #include "mutex-detail.h"
 
-#endif /* EPYX_MUTEX_H */
+#endif /* MODAL_MUTEX_H */

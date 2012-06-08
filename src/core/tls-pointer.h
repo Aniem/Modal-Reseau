@@ -2,15 +2,15 @@
  * @file tls-pointer.h
  * @brief TLS pointer definition.
  */
-#ifndef EPYX_TLS_POINTER_H
-#define EPYX_TLS_POINTER_H
+#ifndef MODAL_TLS_POINTER_H
+#define MODAL_TLS_POINTER_H
 
 #include <pthread.h>
 #include "assert.h"
 #include "exception.h"
 
 
-namespace Epyx
+namespace Modal
 {
     /**
      * @class TLSPointer
@@ -85,4 +85,4 @@ namespace Epyx
 
 #include "tls-pointer-detail.h"
 
-#endif /* EPYX_TLS_POINTER_H */
+#endif /* MODAL_TLS_POINTER_H */

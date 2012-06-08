@@ -2,15 +2,15 @@
  * @file blocking-queue.h
  * @brief a blocking queue definition.
  */
-#ifndef EPYX_BLOCKING_QUEUE_H
-#define EPYX_BLOCKING_QUEUE_H
+#ifndef MODAL_BLOCKING_QUEUE_H
+#define MODAL_BLOCKING_QUEUE_H
 
 #include <queue>
 #include <iostream>
 #include "assert.h"
 #include "condition.h"
 
-namespace Epyx
+namespace Modal
 {
     /**
      * @class BlockingQueue
@@ -145,4 +145,4 @@ namespace Epyx
 
 #include "blocking-queue-detail.h"
 
-#endif /* EPYX_BLOCKING_QUEUE_H */
+#endif /* MODAL_BLOCKING_QUEUE_H */

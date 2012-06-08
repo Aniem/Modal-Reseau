@@ -2,8 +2,8 @@
  * @file log.h
  * @brief A thread safe logging system.
  */
-#ifndef EPYX_LOG_H
-#define EPYX_LOG_H
+#ifndef MODAL_LOG_H
+#define MODAL_LOG_H
 
 #include <fstream>
 #include <sstream>
@@ -12,7 +12,7 @@
 #include "tls-pointer.h"
 #include "assert.h"
 
-namespace Epyx {
+namespace Modal {
 namespace log {
 
     //Other modules should not access these variable
@@ -128,7 +128,7 @@ namespace log {
 
     //End of the definition of Stream
     template<typename T> Stream& Stream::operator<<(const T& arg) {
-        EPYX_ASSERT_NO_LOG(log::initialized);
+        MODAL_ASSERT_NO_LOG(log::initialized);
         _buffers->get()->b[this->priority] << arg;
         return *this;
     }
@@ -168,4 +168,4 @@ namespace log {
 }
 }
 
-#endif /* EPYX_LOG_H */
+#endif /* MODAL_LOG_H */
