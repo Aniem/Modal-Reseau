@@ -6,7 +6,7 @@
 #include "api.h"
 #include "natpunching/openconnection.h"
 
-namespace Epyx
+namespace Modal
 {
 
     API::API(int logflags, const std::string& logfile)
@@ -87,7 +87,7 @@ namespace Epyx
     int API::addNode(N2NP::Node *node) {
         if (netsel == NULL)
             throw FailException("API::addNode", "No NetSelect created");
-        EPYX_ASSERT(node != NULL);
+        MODAL_ASSERT(node != NULL);
 
         int index = netsel->add(node);
         nodeIndexes.set(index, index);
@@ -102,7 +102,7 @@ namespace Epyx
     }
 
     void API::destroyAllNodes() {
-        EPYX_ASSERT(netsel != NULL);
+        MODAL_ASSERT(netsel != NULL);
         for (atom::Map<int, int>::iterator i = nodeIndexes.beginLock();
             !nodeIndexes.isEnd(i); i++) {
             netsel->kill(i->first);
@@ -112,17 +112,17 @@ namespace Epyx
     }
 
     void API::waitNet() {
-        EPYX_ASSERT(netsel != NULL);
+        MODAL_ASSERT(netsel != NULL);
         netsel->wait();
     }
 
     API::OpenConnThread::OpenConnThread(API *api)
     :api(api) {
-        EPYX_ASSERT(api != NULL);
+        MODAL_ASSERT(api != NULL);
     }
 
     void API::OpenConnThread::run() {
-        EPYX_ASSERT(api != NULL);
+        MODAL_ASSERT(api != NULL);
         while (true) {
             // Get node indexes from the locked map
             std::list<int> nodeIndexesList;

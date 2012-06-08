@@ -6,46 +6,46 @@ static const int MAXLENGTH = 10000;
 bool test_parser() {
     // Build a N2NP packet
     std::string testmethod("Test");
-    std::string message("Hello World. Let me introduce you to Epyx.");
-    Epyx::N2NP::Packet pkt(testmethod, message.length(), message.c_str());
-    pkt.from = Epyx::N2NP::NodeId("Epyx@129.104.13.37:42");
-    pkt.to = Epyx::N2NP::NodeId("World@");
+    std::string message("Hello World. Let me introduce you to Modal.");
+    Modal::N2NP::Packet pkt(testmethod, message.length(), message.c_str());
+    pkt.from = Modal::N2NP::NodeId("Modal@129.104.13.37:42");
+    pkt.to = Modal::N2NP::NodeId("World@");
     pkt.method = "PING";
     pkt.version = "1";
     pkt.pktID = 2010;
 
     // Raw packet
-    Epyx::log::info << "Building packet " << pkt << Epyx::log::endl;
+    Modal::log::info << "Building packet " << pkt << Modal::log::endl;
     char *data = NULL;
     unsigned long size = pkt.build(&data);
-    Epyx::log::info << "Raw packet:\n" << std::string(data, size) << Epyx::log::endl;
+    Modal::log::info << "Raw packet:\n" << std::string(data, size) << Modal::log::endl;
 
     // Parse
-    Epyx::GTTParser parser;
-    Epyx::GTTPacket *gttpkt = NULL;
+    Modal::GTTParser parser;
+    Modal::GTTPacket *gttpkt = NULL;
     parser.eat(data, size);
     gttpkt = parser.getPacket();
     delete[] data;
     data = NULL;
     if (gttpkt == NULL) {
-        Epyx::log::info << "Incomplete raw packet :(" << Epyx::log::endl;
+        Modal::log::info << "Incomplete raw packet :(" << Modal::log::endl;
         return false;
     }
-    Epyx::log::info << "Parsed GTT packet:\n" << *gttpkt << Epyx::log::endl;
+    Modal::log::info << "Parsed GTT packet:\n" << *gttpkt << Modal::log::endl;
     // Create N2NP packet from GTT
-    Epyx::N2NP::Packet n2nppkt(*gttpkt);
+    Modal::N2NP::Packet n2nppkt(*gttpkt);
     delete gttpkt;
     gttpkt = NULL;
-    Epyx::log::info << "Parsed N2NP packet: " << n2nppkt << Epyx::log::endl;
+    Modal::log::info << "Parsed N2NP packet: " << n2nppkt << Modal::log::endl;
     return true;
 }
 
 int main() {
-    Epyx::API epyx;
+    Modal::API epyx;
     try {
         test_parser();
-    } catch (Epyx::Exception e) {
-        Epyx::log::fatal << e << Epyx::log::endl;
+    } catch (Modal::Exception e) {
+        Modal::log::fatal << e << Modal::log::endl;
     }
     return 0;
 }

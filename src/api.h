@@ -1,10 +1,10 @@
 /**
  * @file api.h
- * @brief Application Programming Interface of Epyx
+ * @brief Application Programming Interface of Modal
  */
 
-#ifndef EPYX_API_H
-#define EPYX_API_H
+#ifndef MODAL_API_H
+#define MODAL_API_H
 
 #include "core/common.h"
 #include "core/atom/counter.h"
@@ -14,7 +14,7 @@
 #include "n2np/node.h"
 #include <list>
 
-namespace Epyx
+namespace Modal
 {
     class API
     {
@@ -27,7 +27,7 @@ namespace Epyx
         API(int logflags = log::CONSOLE, const std::string& logfile = "");
 
         /**
-         * @brief End Epyx
+         * @brief End Modal
          */
         ~API();
 
@@ -110,4 +110,4 @@ namespace Epyx
     };
 }
 
-#endif /* EPYX_API_H */
+#endif /* MODAL_API_H */
