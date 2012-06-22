@@ -1,7 +1,7 @@
 #include "routeReqSender.h"
 #include "modRoute.h"
 
-namespace Epyx {
+namespace Modal {
     int RouteReqSender::maxNumberOfTry = 10;
     int RouteReqSender::attemptTime = 500000;
 

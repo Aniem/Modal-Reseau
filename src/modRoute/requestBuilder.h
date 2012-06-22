@@ -4,7 +4,7 @@
 #include "../parser/gttpacket.h"
 #include <sstream>
 
-namespace Epyx {
+namespace Modal {
     class RequestBuilder : public Thread {
 
     public:

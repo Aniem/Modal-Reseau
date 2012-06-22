@@ -4,7 +4,7 @@
 #include "../core/thread.h"
 #include "routeTableEntry.h"
 
-namespace Epyx {
+namespace Modal {
     enum RouteReqStatus {INIT, WAITING, FAILED, SUCCESS};
 
     class RouteReqSender : public Thread {

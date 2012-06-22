@@ -1,6 +1,6 @@
 #include "requestBuilder.h"
 
-namespace Epyx {
+namespace Modal {
     int RequestBuilder::defaultTTL = 10;
     std::string RequestBuilder::protocol = "MESH";
 

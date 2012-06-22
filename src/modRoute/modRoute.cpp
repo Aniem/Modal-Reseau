@@ -1,7 +1,7 @@
 #include "modRoute.h"
 #include <sstream>
 
-namespace Epyx {
+namespace Modal {
     ModRoute::ModRoute() {
         this->routeValidityTime = 1000;
     }

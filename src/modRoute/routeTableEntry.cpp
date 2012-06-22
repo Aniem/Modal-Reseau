@@ -1,6 +1,6 @@
 #include "routeTableEntry.h"
 
-namespace Epyx {
+namespace Modal {
     RoutingTableEntry::RoutingTableEntry() {
         
     }
