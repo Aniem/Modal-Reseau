@@ -1,0 +1,12 @@
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+.anjuta
+.anjuta_sym_db.db
+bin/*
+*~
+*.log
+/nbproject/
+doc/doxygen
+modal.*
