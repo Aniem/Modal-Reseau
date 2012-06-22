@@ -1,9 +1,10 @@
 #ifndef MODAL_MODROUTEREQSENDER_H
 #define MODAL_MODROUTEREQSENDER_H
+#include <sstream>
 #include "../core/thread.h"
-#include "modRoute.h"
+#include "routeTableEntry.h"
 
-namespace Modal {
+namespace Epyx {
     enum RouteReqStatus {INIT, WAITING, FAILED, SUCCESS};
 
     class RouteReqSender : public Thread {
@@ -15,7 +16,7 @@ namespace Modal {
 
         void run();
 
-        void giveResponse(std::string ip);
+        void giveResponse(std::string ip, int timeExpire);
 
         void increaseReqNumber();
         void decreaseReqNumber();
@@ -24,7 +25,9 @@ namespace Modal {
 
         int getNumberOfTry();
 
-        RoutingTableEntry getResponse();
+        int getNumberOfRequests();
+
+        RoutingTableEntry* getResponse();
 
 
     private:
@@ -38,7 +41,7 @@ namespace Modal {
 
         RouteReqStatus currentStatus;
 
-        RoutingTableEntry response;
+        RoutingTableEntry* response;
     };
 }
 #endif /* MODAL_ROUTEREQSENDER_H */

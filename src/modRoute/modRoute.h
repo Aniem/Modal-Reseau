@@ -2,39 +2,41 @@
 #define MODAL_MODROUTE_H
 #include <string>
 #include <sstream>
+#include <unistd.h>
+#include <sys/time.h>
 #include "../parser/gttpacket.h"
+#include "routeTableEntry.h"
 #include "routeReqSender.h"
 #include "requestBuilder.h"
 
-// Construction des paquets ? (N2NP ou gttpacket)
+// Utiliser unistd pour sleep ?
+// Qui gère les routesREQ .
 // Gestion des dates
-// Gestion des thread (sleep, stop)
 
-namespace Modal {
+namespace Epyx {
 
-    typedef struct RoutingTableEntry RoutingTableEntry;
-    struct RoutingTableEntry {
-        std::string nextHop;
-        int expires;
-    };
+    class ModRoute {
 
-    class ModeRoute {
     public:
 
-        ModeRoute();
+        ModRoute();
 
         std::string getNextHop(const std::string ip);
 
         std::string rebuildRoute(const std::string ip);
 
-        void handleRouteRequest(GTTPacket pkt);
+        //void handleRouteRequest(GTTPacket* pkt);
 
-        void handleRouteResponse(GTTPacket pkt);
+        void handleRouteResponse(GTTPacket* pkt);
 
     private:
-        std::map<std::string, RouteReqSender> currentRequests;
+        std::map<std::string, RouteReqSender*> currentRequests;
 
-        std::map<std::string, RoutingTableEntry> routingTable;
+        std::map<std::string, RoutingTableEntry*> routingTable;
+
+        long getTimeMs();
+
+        int routeValidityTime;
     };
 
 }

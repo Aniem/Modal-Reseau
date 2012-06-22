@@ -1,9 +1,9 @@
 #include "routeReqSender.h"
 #include "modRoute.h"
 
-namespace Modal {
+namespace Epyx {
     int RouteReqSender::maxNumberOfTry = 10;
-    int RouteReqSender::attemptTime = 500;
+    int RouteReqSender::attemptTime = 500000;
 
     RouteReqSender::RouteReqSender() {
         this->currentStatus = INIT;
@@ -19,7 +19,11 @@ namespace Modal {
         return this->numberOfTry;
     }
 
-    RoutingTableEntry RouteReqSender::getResponse() {
+    int RouteReqSender::getNumberOfRequests() {
+        return this->numberOfRequests;
+    }
+
+    RoutingTableEntry *RouteReqSender::getResponse() {
         return this->response;
     }
 
@@ -28,16 +32,20 @@ namespace Modal {
 
         while(this->currentStatus == WAITING) {
             //TODO UNKNWOWNCLASS::sendRequest(requestBuilder::buildRREQ(this->query));
-            //TODO : Faire dormir le thread pendant attemptTime ms
+
+            usleep(this->attemptTime);
             (this->numberOfTry)++;
+
             if(this->numberOfTry >= RouteReqSender::maxNumberOfTry) {
                 this->currentStatus = FAILED;
             }
         }
     }
 
-    void RouteReqSender::giveResponse(std::string ip, int validity) {
-        this->nextHop = ip;
+    void RouteReqSender::giveResponse(std::string ip, int timeExpire) {
+        this->response = new RoutingTableEntry();
+        this->response->nextHop = ip;
+        this->response->expires = timeExpire;
         this->currentStatus = SUCCESS;
     }
 

@@ -4,12 +4,12 @@
 #include "../parser/gttpacket.h"
 #include <sstream>
 
-namespace Modal {
+namespace Epyx {
     class RequestBuilder : public Thread {
 
     public:
-    static N2NP::Packet buildRREQ(std::string query, int ttl);
-    static N2NP::Packet buildRREP(std::string rep, std::string dest, int ttl);
+    static GTTPacket buildRREQ(std::string query, int ttl);
+    static GTTPacket buildRREP(std::string rep, std::string dest, int ttl);
 
     private:
     static std::string fromInt(int i);
