@@ -3,9 +3,12 @@
 namespace Modal{
 	class wlan : public Thread {
 		public:
-			int wlan();
+			int wlan(Modal::TunInterface tun,Modal::ModRoute mod);
 			void recevons(void* buf, int size);
 		protected:
-			UDPSocket *skfd;
+			Modal::UDPSocket skfd=UDPSocket();
+			Modal::TunInterface *t;
+			Modal::ModRoute *mod;
+			
 	};
 }
