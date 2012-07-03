@@ -5,6 +5,7 @@
 #include "../tuntap/tuninterface.h"
 #include "../parser/gttpacket.h"
 #include "../parser/gttparser.h"
+#include "../modRoute/requestBuilder.h"
 #include <iostream>
 #include <string>
 #include <strings.h>
@@ -18,6 +19,7 @@ namespace Modal{
 			void send(void* data, int size,int port);
 			void run();
 			int quefaire(Modal::GTTPacket * gttpkt);
+			void sendBroadcast(GTTPacket* pkt, void* data, int size,int port);
 		protected:
 			Modal::UDPSocket* skfd;
 			Modal::TunInterface *t;
