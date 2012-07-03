@@ -129,10 +129,10 @@ namespace Modal {
             packet->headers["Content-length"]=s;
             toRead.push(packet);
             
-            char essai[4096];
+            /*char essai[4096];
             s = packet->build(&essai);
             std::string msg (essai,s);
-            log::debug << msg << log::endl;
+            log::debug << msg << log::endl; // */
         }
         
     }

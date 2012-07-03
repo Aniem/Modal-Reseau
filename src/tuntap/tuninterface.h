@@ -21,6 +21,7 @@ namespace Modal {
             GTTPacket* receive();
             void write(GTTPacket *pkt );
             void run();
+            Address buildIPv6Address(const unsigned char hwaddr[6]);
             
         private:
             std::string extractIPv6Address(char* data, int pos);
