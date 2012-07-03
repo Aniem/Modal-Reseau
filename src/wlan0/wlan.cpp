@@ -1,31 +1,45 @@
 #include "wlan.h"
+#include <sstream>
 
-namespace{
-	int wlan::wlan(Modal::TunInterface t,Modal::ModRoute mod,const std::string& ip, unsigned short port){
-		this.t=t;
-		this.mod=mod;
-		this.skfd.setBroadcast(1);
-		this.addr=new Address(ip,port,4);
-	  return 0;
+namespace Modal{
+	wlan::wlan(Modal::TunInterface t,Modal::ModRoute mod,const std::string& ip, unsigned short port){
+		this->skfd=new UDPSocket();
+		this->skfd->setBroadcast(1);
+		this->addr=new Address(ip,port,4);
+
 	}
-	~wlan(){
+	wlan::~wlan(){
 		delete addr;
+		delete skfd;
 	}
-	void wlan:recevons(void* data,int size){
-		skfd.recv(data,size);
-		Modal::N2NP::Packet *n2np=parse(data,size);
+	int wlan::quefaire(Modal::GTTPacket * gttpkt){
+		std::string s(gttpkt->method);
+		std::map<std::string, std::string>::iterator replyTo = gttpkt->headers.find("Destination");
+		if(s.compare("RREQ")==0){
+			Modal::ModRoute::handleRouteRequest(&gttpkt);
+			std::string getNextHop(replyTo->second);
+		}
+		return 0;
+	}
+	void wlan::recevons(void* data,int size){
+		skfd->recv(data,size);
+		Modal::GTTParser parser;
+		parser.eat((const char*)data, size);
+		Modal::GTTPacket *gttpkt= parser.getPacket();
 		
-		int res=quefaire(n2np);
+		int res=wlan::quefaire(&gttpkt);
 		if(res==2){
 			skfd.send(data,size);
 		}
 		if(res==1){
-			t.send(n2np);
+			t.send(gttpkt);
 		}
 		if(res==0){
 		}
+		delete gttpkt;
 	}
-	void wlan:send(void* data, int size,int port){
+
+	void wlan::send(void* data, int size,int port){
 		struct sockaddr_in that;
 		bzero(&that,sizeof(that));
 		that.sin_family = AF_INET;
@@ -33,19 +47,13 @@ namespace{
 		that.sin_addr.s_addr = INADDR_BROADCAST;
 		skfd.sendto(data,size,&that);
 	}
-	Modal::N2NP::Packet parse(void* data, int size){
-		    Modal::GTTParser parser;
-		    parser.eat(data, size);
-		    Modal::GTTPacket *gttpkt= parser.getPacket();
-   		    Modal::N2NP::Packet n2nppkt(*gttpkt);
-		    delete gttpkt;
-		    return n2nppkt;
-	}
-	int quefaire(Modal::N2NP::Packet n2np){
-		return 0;
+
+
+	boolean compare(){
+		
 	}
 
-	void run(){
+	void wlan::run(){
 		
 	}
 }
