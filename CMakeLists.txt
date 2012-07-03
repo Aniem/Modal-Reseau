@@ -48,6 +48,7 @@ add_executable(
     ${core_sources}
     ${net_sources}
     ${tun_sources}
+    ${parser_sources}
     src/test-tuninterface.cpp
 )
 
