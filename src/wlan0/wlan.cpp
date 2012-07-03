@@ -5,7 +5,7 @@ namespace{
 		this.t=t;
 		this.mod=mod;
 		this.skfd.setBroadcast(1);
-		this.addr=new Address(ip,port,6);
+		this.addr=new Address(ip,port,4);
 	  return 0;
 	}
 	~wlan(){
@@ -45,7 +45,7 @@ namespace{
 		return 0;
 	}
 
-	void RouteReqSender::run(){
+	void run(){
 		
 	}
 }

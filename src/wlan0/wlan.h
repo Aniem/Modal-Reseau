@@ -1,6 +1,8 @@
 #include "../net/udpsocket.h"
 #include "../net/address.h";
 #include "../core/thread.h";
+#include "../modRoute/modRoute.h"
+#include "../tuntap/tuninterface.h"
 
 namespace Modal{
 	class wlan : public Thread {
