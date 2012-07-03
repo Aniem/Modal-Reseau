@@ -41,7 +41,7 @@ namespace Modal{
 		}
 		return 0;
 	}
-	void wlan::sendBroadcast(GTTPacket* pkt, void* data, int size,int port){
+	void wlan::sendBroadcast(GTTPacket* pkt, int size,int port){
 		char* newdata=new char[size];
 		pkt->build(&newdata);
 		wlan::send(newdata,size,port);
