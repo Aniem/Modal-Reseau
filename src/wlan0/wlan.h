@@ -5,6 +5,7 @@ namespace Modal{
 		public:
 			int wlan(Modal::TunInterface tun,Modal::ModRoute mod);
 			void recevons(void* buf, int size);
+			void run();
 		protected:
 			Modal::UDPSocket skfd=UDPSocket();
 			Modal::TunInterface *t;
