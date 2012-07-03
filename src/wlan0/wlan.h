@@ -19,7 +19,7 @@ namespace Modal{
 			void send(void* data, int size,int port);
 			void run();
 			int quefaire(Modal::GTTPacket * gttpkt);
-			void sendBroadcast(GTTPacket* pkt, void* data, int size,int port);
+			void sendBroadcast(GTTPacket* pkt,  int size,int port);
 		protected:
 			Modal::UDPSocket* skfd;
 			Modal::TunInterface *t;
