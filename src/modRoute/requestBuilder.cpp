@@ -2,7 +2,8 @@
 
 namespace Modal {
     std::string RequestBuilder::protocol = "MESH";
-
+	RequestBuilder::RequestBuilder(){
+}
     GTTPacket RequestBuilder::buildRREQ(std::string source, std::string dest, std::string sender, int ttl) {
         GTTPacket result;
 
