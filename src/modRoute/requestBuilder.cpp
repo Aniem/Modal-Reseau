@@ -1,35 +1,33 @@
 #include "requestBuilder.h"
 
 namespace Modal {
-    int RequestBuilder::defaultTTL = 10;
     std::string RequestBuilder::protocol = "MESH";
 
-    GTTPacket RequestBuilder::buildRREQ(std::string query, int ttl) {
+    GTTPacket RequestBuilder::buildRREQ(std::string source, std::string dest, std::string sender, int ttl) {
         GTTPacket result;
-	int finalTTL = ttl == 0 ? RequestBuilder::defaultTTL : ttl;
 
         result.protocol = RequestBuilder::protocol;
 	result.method = "RREQ";
 
-	//result.headers.insert(std::pair<std::string, std::string>("Source", ""));
-        //result.headers.insert(std::pair<std::string, std::string>("Sender", ""));
-        result.headers.insert(std::pair<std::string, std::string>("Destination", query));
-        result.headers.insert(std::pair<std::string, std::string>("N", RequestBuilder::fromInt(finalTTL)));
+	result.headers.insert(std::pair<std::string, std::string>("Source", source));
+        result.headers.insert(std::pair<std::string, std::string>("Destination", dest));
+        result.headers.insert(std::pair<std::string, std::string>("Sender", sender));
+        result.headers.insert(std::pair<std::string, std::string>("N", RequestBuilder::fromInt(ttl)));
 
         return result;
     }
 
-    GTTPacket RequestBuilder::buildRREP(std::string rep, std::string dest, int ttl) {
+    GTTPacket RequestBuilder::buildRREP(std::string source, std::string dest, std::string sender, std::string nextHop, int ttl) {
  	GTTPacket result;
-	int finalTTL = ttl == 0 ? RequestBuilder::defaultTTL : ttl;
 
         result.protocol = RequestBuilder::protocol;
 	result.method = "RREP";
 
-	result.headers.insert(std::pair<std::string, std::string>("Source", rep));
+	result.headers.insert(std::pair<std::string, std::string>("Source", source));
         result.headers.insert(std::pair<std::string, std::string>("Destination", dest));
-	//result.headers.insert(std::pair<std::string, std::string>("NextHop", ""));
-        result.headers.insert(std::pair<std::string, std::string>("N", RequestBuilder::fromInt(finalTTL)));
+        result.headers.insert(std::pair<std::string, std::string>("Sender", sender));
+	result.headers.insert(std::pair<std::string, std::string>("NextHop", nextHop));
+        result.headers.insert(std::pair<std::string, std::string>("N", RequestBuilder::fromInt(ttl)));
 
         return result;
     }
