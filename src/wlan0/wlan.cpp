@@ -24,10 +24,8 @@ namespace{
 		    delete gttpkt;
 		    return n2nppkt;
 	}
-	int quoifaire(Modal::N2NP::Packet* gtt){
-		if(strcpy(gtt->method,"
+
+	void RouteReqSender::run(){
+		
 	}
-	/*Modal::GTTParser parser;
-    Modal::GTTPacket *gttpkt = NULL;
-	Modal::GTTPacket*/
 }
