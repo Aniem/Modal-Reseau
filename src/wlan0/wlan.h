@@ -7,6 +7,7 @@
 #include "../parser/gttparser.h"
 #include <iostream>
 #include <string>
+#include <strings.h>
 
 namespace Modal{
 	class wlan : public Thread {

@@ -29,10 +29,10 @@ namespace Modal{
 		
 		int res=wlan::quefaire(&gttpkt);
 		if(res==2){
-			skfd.send(data,size);
+			skfd->send(data,size);
 		}
 		if(res==1){
-			t.send(gttpkt);
+			//t.send(gttpkt);
 		}
 		if(res==0){
 		}
@@ -45,12 +45,12 @@ namespace Modal{
 		that.sin_family = AF_INET;
 		that.sin_port = htons(port);
 		that.sin_addr.s_addr = INADDR_BROADCAST;
-		skfd.sendto(data,size,&that);
+		skfd->send(data,size,(struct sockaddr*)&that);
 	}
 
 
-	boolean compare(){
-		
+	bool compare(){
+		return true;
 	}
 
 	void wlan::run(){
