@@ -55,7 +55,7 @@ add_executable(
     ${net_sources}
     ${parser_sources}
     ${wlan_sources}
-    src/wlan0/wlan-test.cpp
+   src/wlan0/wlan-test.cpp
 )
 target_link_libraries(
     test-wlan
@@ -69,3 +69,7 @@ add_executable(
     ${tun_sources}
     src/test-tuninterface.cpp
 )
+target_link_libraries(
+    test-tuntap
+    pthread
+    )
