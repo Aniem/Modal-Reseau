@@ -23,7 +23,7 @@ namespace Modal{
 				return RREQ;
 		}
 		else if(s.compare("RREP")==0){
-			mod->handleRouteResponse(gttpkt);
+			mod->handleRouteReply(gttpkt);
 				return RREP;
 		}
 		return 0;
@@ -41,8 +41,7 @@ namespace Modal{
 		Modal::GTTPacket *gttpkt= parser.getPacket();
 		
 		switch(wlan::quefaire(gttpkt)){
-			case BRDCST:
-				break;
+
 			default:
 				//Modal::log::info <<"Le paquet arrivé ne peut être traité."<< Modal::log::endl;;
 				//On DROP

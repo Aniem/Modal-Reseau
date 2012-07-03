@@ -57,4 +57,7 @@ add_executable(
     ${wlan_sources}
     src/wlan0/wlan-test.cpp
 )
-
+target_link_libraries(
+    test-wlan
+    pthread
+    )

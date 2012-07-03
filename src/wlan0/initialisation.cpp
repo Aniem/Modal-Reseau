@@ -1,6 +1,4 @@
-extern "C" {
 #include "iwlib.h"		/* Header */
-}
 #include "initialisation.h"
 
 /**************************** CONSTANTS ****************************/
@@ -15,20 +13,9 @@ extern "C" {
 #define IWERR_SET_EXT		-6
 #define IWERR_GET_EXT		-7
 
-/**************************** VARIABLES ****************************/
-
-/*
- * Ugly, but deal with errors in set_info() efficiently...
- */
 namespace Modal{
-	static int	errarg;
-	static int	errmax;
-
-	static int
-	set_essid_info(int		skfd,
-		       char *		ifname,
-		       char *		args[],		/* Command line args */
-		       int		count)		/* Args count */
+	static int errmax;
+	int	set_essid_info(int skfd,	 char *ifname,  char *	args[],	  int	count)	
 	{
 	  struct iwreq		wrq;
 	  int			i = 1;
@@ -120,7 +107,7 @@ namespace Modal{
 
 	int associate(char* essid){
 		int s=sockets_open();
-		set_essid_info(s,"wlan0",essid,1);
+		set_essid_info(s,"wlan0",&essid,1);
 		while(1);
 		return 0;
 	}
