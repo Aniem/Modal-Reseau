@@ -1,5 +1,6 @@
 #include "ctlsocket.h"
 #include "../core/log.h"
+#include "tuninterface.h"
 
 #include <iostream>
 #include <cstdio>
@@ -30,11 +31,13 @@ namespace Modal {
         ioctl(sock, SIOCSIFFLAGS, &ifr);        
     }
 
-    void CtlSocket::setIPv6address(std::string devnametocopy){
+    Address CtlSocket::setIPv6address(std::string devnametocopy){
         struct ifreq ifr;
         strncpy(ifr.ifr_name,devnametocopy.c_str(),IFNAMSIZ);
         ioctl(sock,SIOCGIFHWADDR, &ifr);
-        std::stringstream msg;
+        unsigned char hwaddr[6];
+        memcpy(hwaddr,ifr.ifr_hwaddr.sa_data,6);
+        /*std::stringstream msg;
         char* addr1 = ifr.ifr_hwaddr.sa_data;
         long addr = (long) addr1;
         msg <<"0x" << std::hex << addr1;
@@ -42,14 +45,17 @@ namespace Modal {
         log::debug << "CtlSocket sa_data size : " << sizeof(ifr.ifr_hwaddr.sa_data) << log::endl;
         log::debug << "CtlSocket sa_data hex : " << msg.str() << log::endl;
         log::debug << "CtlSocket sa_family : " << ifr.ifr_hwaddr.sa_family << log::endl;
-        
+        */
+        Address myIPAddress = TunInterface::buildIPv6Address(hwaddr);
         //WILL HAVE TO BE CHANGED
         std::string command = "ifconfig ";
         command += devname;
         command += " add ";
-        command += "aaaa::1989/64";
+        command += myIPAddress.toString();
+        command += "/48";
+        log::debug << command << log::endl;
         system(command.c_str());
-                   
+        return myIPAddress;
     }
 }
 

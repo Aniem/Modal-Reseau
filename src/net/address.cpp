@@ -130,7 +130,7 @@ namespace Modal
 
     std::ostream& operator<<(std::ostream& os, const Address& addr) {
         if (addr.ipVersion == 6)
-            os << '[' << addr.ip << ']';
+            os << addr.ip;
         else if (addr.ip.length())
             os << addr.ip;
         else

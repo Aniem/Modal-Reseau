@@ -17,11 +17,11 @@ namespace Modal {
             int openDevNetTun(std::string dev);
             ~TunInterface();
             void setMTU(int i);
-            void setIPv6address(std::string dev);
+            Address setIPv6address(std::string dev);
             GTTPacket* receive();
             void write(GTTPacket *pkt );
             void run();
-            Address buildIPv6Address(const unsigned char hwaddr[6]);
+            static Address buildIPv6Address(const unsigned char hwaddr[6]);
             
         private:
             std::string extractIPv6Address(char* data, int pos);

@@ -65,10 +65,11 @@ namespace Modal {
         sock.setMTU(i);
         sock.close();
     }
-    void TunInterface::setIPv6address(std::string dev){
+    Address TunInterface::setIPv6address(std::string dev){
         CtlSocket sock(this->deviceName);
-        sock.setIPv6address(dev);
+        Address addr = sock.setIPv6address(dev);
         sock.close();
+        return addr;
     }
 
     int TunInterface::read(char* data, int maxsize){

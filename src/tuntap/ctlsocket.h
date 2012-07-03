@@ -7,7 +7,7 @@ namespace Modal{
         public:
             CtlSocket(std::string devname);
             void setMTU(int i);
-            void setIPv6address(std::string devnametocopy);
+            Address setIPv6address(std::string devnametocopy);
             void activate();
         private:
             std::string devname;
