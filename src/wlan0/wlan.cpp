@@ -1,7 +1,7 @@
 #include "wlan.h"
 #include <sstream>
-#define RREP 4 //Le paquet RREQ nous est destiné
-#define BRDCST 1 //Le RREQ/RREP n'est pas pour nous : on le broadcast
+#define RREP 4 
+#define RREQ 3
 namespace Modal{
 	wlan::wlan(Modal::TunInterface t,Modal::ModRoute mod,const std::string& ip, unsigned short port){
 		this->skfd=new UDPSocket();
@@ -19,25 +19,12 @@ namespace Modal{
 
 
 		if(s.compare("RREQ")==0){
-			std::map<std::string, std::string>::iterator sender = gttpkt->headers.find("Source");
-			std::map<std::string, std::string>::iterator replyTo = gttpkt->headers.find("Destination");
-			std::map<std::string, std::string>::iterator nextHopToSender = gttpkt->headers.find("Sender");
-			std::map<std::string, std::string>::iterator pktTarget = gttpkt->headers.find("NextHop");
-			std::map<std::string, std::string>::iterator n = gttpkt->headers.find("N");
-			std::istringstream ss(n->second);
-			int ttl;
-			ss >> ttl;
-		        if(ttl <= 0) return 0; 
 			mod->handleRouteRequest(gttpkt);
-			std::string s1(replyTo->second);
-			std::string s2(addr->getIp());
-			if(s1.compare(s2)==0)
+				return RREQ;
+		}
+		else if(s.compare("RREP")==0){
+			mod->handleRouteResponse(gttpkt);
 				return RREP;
-			else{
-				
-				return BRDCST;
-					
-			}
 		}
 		return 0;
 	}
