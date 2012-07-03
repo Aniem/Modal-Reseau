@@ -6,7 +6,8 @@ namespace Modal{
 		this->skfd=new UDPSocket();
 		this->skfd->setBroadcast(1);
 		this->addr=new Address(ip,port,4);
-
+		this->mod=&mod;
+		this->t=&t;
 	}
 	wlan::~wlan(){
 		delete addr;
@@ -16,7 +17,7 @@ namespace Modal{
 		std::string s(gttpkt->method);
 		std::map<std::string, std::string>::iterator replyTo = gttpkt->headers.find("Destination");
 		if(s.compare("RREQ")==0){
-			Modal::ModRoute::handleRouteRequest(&gttpkt);
+			mod->handleRouteRequest(gttpkt);
 			std::string getNextHop(replyTo->second);
 		}
 		return 0;
@@ -27,7 +28,7 @@ namespace Modal{
 		parser.eat((const char*)data, size);
 		Modal::GTTPacket *gttpkt= parser.getPacket();
 		
-		int res=wlan::quefaire(&gttpkt);
+		int res=wlan::quefaire(gttpkt);
 		if(res==2){
 			skfd->send(data,size);
 		}
