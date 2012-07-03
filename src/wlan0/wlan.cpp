@@ -1,6 +1,7 @@
 #include "wlan.h"
 #include <sstream>
-
+#define RREP 4 //Le paquet RREQ nous est destiné
+#define BRDCST 1 //Le RREQ/RREP n'est pas pour nous : on le broadcast
 namespace Modal{
 	wlan::wlan(Modal::TunInterface t,Modal::ModRoute mod,const std::string& ip, unsigned short port){
 		this->skfd=new UDPSocket();
@@ -16,9 +17,19 @@ namespace Modal{
 	int wlan::quefaire(Modal::GTTPacket * gttpkt){
 		std::string s(gttpkt->method);
 		std::map<std::string, std::string>::iterator replyTo = gttpkt->headers.find("Destination");
+		std::map<std::string, std::string>::iterator n = gttpkt->headers.find("N");
+		std::istringstream ss(n->second);
+		int ttl;
+		ss >> ttl;
+		        if(ttl <= 0) return 0; 
 		if(s.compare("RREQ")==0){
 			mod->handleRouteRequest(gttpkt);
-			std::string getNextHop(replyTo->second);
+			std::string s1(replyTo->second);
+			if(s1.compare(addr->getIp())==0)
+				return RREP;
+			else{
+				return BRDCST;
+			}
 		}
 		return 0;
 	}
@@ -28,14 +39,13 @@ namespace Modal{
 		parser.eat((const char*)data, size);
 		Modal::GTTPacket *gttpkt= parser.getPacket();
 		
-		int res=wlan::quefaire(gttpkt);
-		if(res==2){
-			skfd->send(data,size);
-		}
-		if(res==1){
-			//t.send(gttpkt);
-		}
-		if(res==0){
+		switch(wlan::quefaire(gttpkt)){
+			case BRDCST:
+				
+			default:
+				//Modal::log::info <<"Le paquet arrivé ne peut être traité."<< Modal::log::endl;;
+				//On DROP
+				break;
 		}
 		delete gttpkt;
 	}

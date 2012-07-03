@@ -50,16 +50,11 @@ file(
 # Test executables
 
 add_executable(
-    test-tuntap
+    test-wlan
     ${core_sources}
     ${net_sources}
-    ${tun_sources}
     ${parser_sources}
     ${wlan_sources}
-    src/test-tuninterface.cpp
+    src/wlan0/wlan-test.cpp
 )
 
-target_link_libraries(
-    test-tuntap
-    pthread
-)

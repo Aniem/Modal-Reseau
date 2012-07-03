@@ -62,7 +62,7 @@ namespace Modal {
     }
 
 
-    void ModRoute::handleRouteReply(GTTPacket* pkt) {
+    void ModRoute::handleRouteReply(Modal::GTTPacket* pkt) {
         // Retreive usefull datas from the transmitted packet and do nothing if it was not well-formed
         std::map<std::string, std::string>::iterator sender = pkt->headers.find("Source");
         std::map<std::string, std::string>::iterator replyTo = pkt->headers.find("Destination");
@@ -100,7 +100,7 @@ namespace Modal {
         }
     }
 
-    void ModRoute::handleRouteRequest(GTTPacket* pkt) {
+    void ModRoute::handleRouteRequest(Modal::GTTPacket* pkt) {
         // Retreive usefull datas from the transmitted packet and do nothing if it was not well-formed
         std::map<std::string, std::string>::iterator targetIP = pkt->headers.find("Destination");
         std::map<std::string, std::string>::iterator requestedBy = pkt->headers.find("Source");

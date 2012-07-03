@@ -585,12 +585,6 @@ print_scanning_token(struct stream_descr *	stream,	/* Stream of events */
 		     &event->u.qual, iw_range, has_range);
       printf("                    %s\n", buffer);
       break;
-#ifndef WE_ESSENTIAL
-    case IWEVGENIE:
-      /* Informations Elements are complex, let's do only some of them */
-      iw_print_gen_ie(event->u.data.pointer, event->u.data.length);
-      break;
-#endif	/* WE_ESSENTIAL */
     case IWEVCUSTOM:
       {
 	char custom[IW_CUSTOM_MAX+1];
@@ -629,7 +623,7 @@ print_scanning_info(int		skfd,
   /* Avoid "Unused parameter" warning */
   args = args; count = count;
 
-
+  /* Debugging stuff */
 
   /* Get range stuff */
   has_range = (iw_get_range_info(skfd, ifname, &range) >= 0);

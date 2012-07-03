@@ -24,9 +24,9 @@ namespace Modal {
 
         std::string buildRoute(const std::string ip);
 
-        void handleRouteReply(GTTPacket* pkt);
+        void handleRouteReply(Modal::GTTPacket* pkt);
 
-        void handleRouteRequest(GTTPacket* pkt);
+        void handleRouteRequest(Modal::GTTPacket* pkt);
 
     private:
         int defaultTTL;

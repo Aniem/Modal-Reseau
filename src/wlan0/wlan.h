@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 #include <strings.h>
-
+//#include "../api.h"
 namespace Modal{
 	class wlan : public Thread {
 		public:
