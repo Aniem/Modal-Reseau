@@ -11,11 +11,11 @@ namespace Modal {
         public:
             TunWriter();
             void run();
-            void addTask(const GTTPacket &pkt);
+            void addTask(GTTPacket *pkt);
             void setDescriptor(int fd);
         private:
             int fd;
-            BlockingQueue<GTTPacket*> toWrite;
+            BlockingQueue<GTTPacket> toWrite;
     };
     
 } // namespace Modal

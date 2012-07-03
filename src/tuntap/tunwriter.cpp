@@ -14,7 +14,7 @@ namespace Modal {
         this->fd=fd;
     }
 
-    void TunWriter::addTask(const GTTPacket & pkt){
+    void TunWriter::addTask(GTTPacket * pkt){
         toWrite.push(pkt);
     }
     void TunWriter::run(){

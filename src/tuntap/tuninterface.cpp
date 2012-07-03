@@ -142,7 +142,7 @@ namespace Modal {
         return ip.str();
     }
 
-    void TunInterface::write(const GTTPacket & pkt){
+    void TunInterface::write(GTTPacket * pkt){
         this->writer.addTask(pkt);
     }
     GTTPacket* TunInterface::receive(){

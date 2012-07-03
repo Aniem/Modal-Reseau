@@ -19,7 +19,7 @@ namespace Modal {
             void setMTU(int i);
             void setIPv6address(std::string dev);
             GTTPacket* receive();
-            void write(const GTTPacket & pkt );
+            void write(GTTPacket *pkt );
             void run();
             
         private:
