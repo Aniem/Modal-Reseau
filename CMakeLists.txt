@@ -61,3 +61,11 @@ target_link_libraries(
     test-wlan
     pthread
     )
+add_executable(
+    test-tuntap
+    ${core_sources}
+    ${net_sources}
+    ${parser_sources}
+    ${tun_sources}
+    src/test-tuninterface.cpp
+)
