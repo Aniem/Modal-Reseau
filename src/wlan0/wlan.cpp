@@ -10,7 +10,7 @@ namespace{
 	void wlan:recevons(void* data,int size){
 		Modal::N2NP::Packet *n2np=skfd.recv(data,size);
 		
-		int res=mod.send(n2np);
+		int res=mod.recv(n2np);
 		if(res==2)
 			skfd.send(data,size);
 		if(res==1)
