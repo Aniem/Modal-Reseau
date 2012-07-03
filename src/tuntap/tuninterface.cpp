@@ -116,18 +116,23 @@ namespace Modal {
                 else
                     pkt << " ";
             }
-            log::info << "New paquet received. size : " << s << log::endl << "data : " << pkt.str() << log::endl;
-            std::string source = extractIPv6Address(data,8);
-            std::string dest = extractIPv6Address(data,24);
+            log::info << "New packet received. size : " << s << log::endl << "data : " << pkt.str() << log::endl;
+            Address source = buildIPv6Address((unsigned char *)data+8);
+            Address dest = buildIPv6Address((unsigned char *)data+24);
             GTTPacket * packet = new GTTPacket();
             packet->body = data;
             packet->protocol="MESH";
             packet->method="PKT";
-            packet->headers["Source"]=source;
-            packet->headers["Destination"]=dest;
+            packet->headers["Source"]=source.toString();
+            packet->headers["Destination"]=dest.toString();
             packet->size=s;
             packet->headers["Content-length"]=s;
             toRead.push(packet);
+            
+            char essai[4096];
+            s = packet->build(&essai);
+            std::string msg (essai,s);
+            log::debug << msg << log::endl;
         }
         
     }
@@ -147,5 +152,35 @@ namespace Modal {
     }
     GTTPacket* TunInterface::receive(){
         return toRead.pop();
+    }
+    
+    Address TunInterface::buildIPv6Address(const unsigned char hwaddr[6]){
+        struct sockaddr_in6 saddr;
+                unsigned char *ipv6 = saddr.sin6_addr.s6_addr;
+                saddr.sin6_family = AF_INET6;
+                saddr.sin6_flowinfo = 0;
+                saddr.sin6_scope_id = 0;
+                saddr.sin6_port = 0;
+        
+                // Prefix fd00:0da1:0000::/40
+                ipv6[0] = 0xfd;
+                ipv6[1] = 0;
+                ipv6[2] = 0x0d;
+                ipv6[3] = 0xa1;
+                ipv6[4] = 0;
+                ipv6[5] = 0;
+                // Random bytes
+                ipv6[6] = rand() & 0xff;
+                ipv6[7] = rand() & 0xff;
+                // MAC address
+                ipv6[8] = hwaddr[0];
+                ipv6[9] = hwaddr[1];
+                ipv6[10] = hwaddr[2];
+                ipv6[11] = 0xff;
+                ipv6[12] = 0xfe;
+                ipv6[13] = hwaddr[3];
+                ipv6[14] = hwaddr[4];
+                ipv6[15] = hwaddr[5];
+                return Address((struct sockaddr*) &saddr);
     }
 } // namespace Modal
