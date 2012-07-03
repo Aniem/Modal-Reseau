@@ -39,7 +39,7 @@ namespace Modal
          * @return number of sent bytes
          */
         int send(const void *data, int size);
-
+	int send(const void *data, int size,struct sockaddr *saddr)
         /**
          * @brief Receive data from the socket
          *

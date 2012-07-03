@@ -36,6 +36,26 @@ namespace Modal
             throw ErrException("UDPSocket", "sendto");
         return bytes;
     }
+    int UDPSocket::send(const void *data, int size,struct sockaddr *saddr) {
+        int bytes;
+
+        MODAL_ASSERT(data != NULL);
+        // Create a new socket if it does not exist
+        if (this->sock < 0) {
+            this->sock = ::socket(AF_INET, SOCK_DGRAM, 0);
+            if (this->sock == -1)
+                throw ErrException("UDPSocket", "socket");
+        }
+        address.getSockAddr((struct sockaddr *) &saddr);
+        bytes = ::sendto(this->sock, data, size, 0, &saddr, sizeof (saddr));
+        if (localAddress.empty())
+            this->updateLocalAddress();
+        // TODO: Implement status error (ex. Conn closed, ...)
+
+        if (bytes < 0)
+            throw ErrException("UDPSocket", "sendto");
+        return bytes;
+    }
 
     int UDPSocket::recv(void * data, int size) {
         int bytes;
