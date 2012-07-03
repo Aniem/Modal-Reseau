@@ -58,6 +58,15 @@ namespace Modal
         lastRecvAddr = Address((const sockaddr *) &saddr);
         return bytes;
     }
+void UDPSocket::setBroadcast(bool enable) {
+        if (sock < 0) {
+            this->create();
+        }
+        int boolean = (enable ? 1 : 0);
+        if (setsockopt(sock, SOL_SOCKET, SO_BROADCAST, &boolean, sizeof (boolean))) {
+            throw ErrException("UDPSocket", "setsokopt(broadcast)");
+        }
+    }
 
     Address UDPSocket::getLastRecvAddr() const {
         return lastRecvAddr;
