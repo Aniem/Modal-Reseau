@@ -53,9 +53,15 @@ namespace Modal
          * @brief Get the remote address from which the last packet was received
          * @return remote address
          */
+<<<<<<< HEAD
 	void setBroadcast(bool enable);
+=======
+>>>>>>> Corrected compilation problem.
         Address getLastRecvAddr() const;
 
+        
+        void setBroadcast(bool enable);
+        void create();
     private:
         Address lastRecvAddr;
     };
