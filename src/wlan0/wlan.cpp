@@ -1,20 +1,33 @@
 #include "wlan.h"
-#include "address.h";
+
 namespace{
-	int wlan::wlan(Modal::TunInterface t,Modal::ModRoute mod){
+	int wlan::wlan(Modal::TunInterface t,Modal::ModRoute mod,const std::string& ip, unsigned short port){
 		this.t=t;
 		this.mod=mod;
 		this.skfd.setBroadcast(1);
+		this.addr=new Address(ip,port,6);
 	  return 0;
 	}
 	void wlan:recevons(void* data,int size){
 		Modal::N2NP::Packet *n2np=skfd.recv(data,size);
 		
-		int res=mod.recv(n2np);
-		if(res==2)
+		int res=quefaire(n2np);
+		if(res==2){
 			skfd.send(data,size);
-		if(res==1)
+		}
+		if(res==1){
 			t.send(n2np);
+		}
+		if(res==0){
+		}
+	}
+	void wlan:send(void* data, int size,int port){
+		struct sockaddr_in that;
+		bzero(&that,sizeof(that));
+		that.sin_family = AF_INET;
+		that.sin_port = htons(port);
+		that.sin_addr.s_addr = INADDR_BROADCAST;
+		skfd.sendto(data,size,&that);
 	}
 	Modal::N2NP::Packet parse(void* data, int size){
 		    Modal::GTTParser parser;
@@ -23,6 +36,9 @@ namespace{
    		    Modal::N2NP::Packet n2nppkt(*gttpkt);
 		    delete gttpkt;
 		    return n2nppkt;
+	}
+	int quefaire(Modal::N2NP::Packet n2np){
+		return 0;
 	}
 
 	void RouteReqSender::run(){
