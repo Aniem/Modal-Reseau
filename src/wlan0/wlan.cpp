@@ -8,8 +8,12 @@ namespace{
 		this.addr=new Address(ip,port,6);
 	  return 0;
 	}
+	~wlan(){
+		delete addr;
+	}
 	void wlan:recevons(void* data,int size){
-		Modal::N2NP::Packet *n2np=skfd.recv(data,size);
+		skfd.recv(data,size);
+		Modal::N2NP::Packet *n2np=parse(data,size);
 		
 		int res=quefaire(n2np);
 		if(res==2){

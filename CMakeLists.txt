@@ -41,6 +41,12 @@ file(
     src/modRoute/*
 )
 
+file(
+    GLOB_RECURSE
+    wlan_sources
+    src/wlan0/*
+)
+
 # Test executables
 
 add_executable(
@@ -49,6 +55,7 @@ add_executable(
     ${net_sources}
     ${tun_sources}
     ${parser_sources}
+    ${wlan_sources}
     src/test-tuninterface.cpp
 )
 
