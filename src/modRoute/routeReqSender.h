@@ -10,34 +10,32 @@ namespace Modal {
     class RouteReqSender : public Thread {
 
     public:
-        RouteReqSender();
-
-        std::string query;
+        RouteReqSender(std::string request);
 
         void run();
-
-        void giveResponse(std::string ip, int timeExpire);
-
-        void increaseReqNumber();
-        void decreaseReqNumber();
 
         int getStatus();
 
         int getNumberOfTry();
 
+        void increaseReqNumber();
+
+        void decreaseReqNumber();
+
+        void setSuccessful();
+
         int getNumberOfRequests();
 
-        RoutingTableEntry* getResponse();
-
-
     private:
+        int numberOfRequests;
+
+        std::string request;
+
         static int maxNumberOfTry;
 
         static int attemptTime;
 
         int numberOfTry;
-
-        int numberOfRequests;
 
         RouteReqStatus currentStatus;
 

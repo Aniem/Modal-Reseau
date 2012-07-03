@@ -5,10 +5,11 @@ namespace Modal {
     int RouteReqSender::maxNumberOfTry = 10;
     int RouteReqSender::attemptTime = 500000;
 
-    RouteReqSender::RouteReqSender() {
+    RouteReqSender::RouteReqSender(std::string request) {
         this->currentStatus = INIT;
         this->numberOfTry = 0;
         this->numberOfRequests = 1;
+        this->request = request;
     }
 
     int RouteReqSender::getStatus() {
@@ -23,8 +24,8 @@ namespace Modal {
         return this->numberOfRequests;
     }
 
-    RoutingTableEntry *RouteReqSender::getResponse() {
-        return this->response;
+    void RouteReqSender::setSuccessful() {
+        this->currentStatus = SUCCESS;
     }
 
     void RouteReqSender::run() {
@@ -32,21 +33,12 @@ namespace Modal {
 
         while(this->currentStatus == WAITING) {
             //TODO UNKNWOWNCLASS::sendRequest(requestBuilder::buildRREQ(this->query));
-
-            usleep(this->attemptTime);
             (this->numberOfTry)++;
-
+            usleep(this->attemptTime);
             if(this->numberOfTry >= RouteReqSender::maxNumberOfTry) {
                 this->currentStatus = FAILED;
             }
         }
-    }
-
-    void RouteReqSender::giveResponse(std::string ip, int timeExpire) {
-        this->response = new RoutingTableEntry();
-        this->response->nextHop = ip;
-        this->response->expires = timeExpire;
-        this->currentStatus = SUCCESS;
     }
 
     void RouteReqSender::increaseReqNumber() { 

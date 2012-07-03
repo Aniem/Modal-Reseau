@@ -8,8 +8,8 @@ namespace Modal {
     class RequestBuilder : public Thread {
 
     public:
-    static GTTPacket buildRREQ(std::string query, int ttl);
-    static GTTPacket buildRREP(std::string rep, std::string dest, int ttl);
+    static GTTPacket buildRREQ(std::string source, std::string dest, std::string sender, int ttl);
+    static GTTPacket buildRREP(std::string source, std::string dest, std::string sender, std::string nextHop, int ttl);
 
     private:
     static std::string fromInt(int i);

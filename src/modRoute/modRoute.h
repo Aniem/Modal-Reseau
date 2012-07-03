@@ -18,18 +18,21 @@ namespace Modal {
     class ModRoute {
 
     public:
-
-        ModRoute();
+        ModRoute(const std::string ip);
 
         std::string getNextHop(const std::string ip);
 
-        std::string rebuildRoute(const std::string ip);
+        std::string buildRoute(const std::string ip);
 
-        //void handleRouteRequest(GTTPacket* pkt);
+        void handleRouteReply(GTTPacket* pkt);
 
-        void handleRouteResponse(GTTPacket* pkt);
+        void handleRouteRequest(GTTPacket* pkt);
 
     private:
+        int defaultTTL;
+
+        std::string myIP;
+
         std::map<std::string, RouteReqSender*> currentRequests;
 
         std::map<std::string, RoutingTableEntry*> routingTable;
