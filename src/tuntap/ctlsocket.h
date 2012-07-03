@@ -5,9 +5,10 @@
 namespace Modal{
     class CtlSocket : public UDPSocket {
         public:
-            CtlSocket(std::string devname,int fd);
-            void setMTU();
-            void setIPv6address();
+            CtlSocket(std::string devname);
+            void setMTU(int i);
+            void setIPv6address(std::string devnametocopy);
+            void activate();
         private:
             std::string devname;
             int fd;

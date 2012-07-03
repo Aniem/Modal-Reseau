@@ -10,8 +10,8 @@
 #include "core/atom/counter.h"
 #include "core/atom/map.h"
 #include "net/netselect.h"
-#include "n2np/relay.h"
-#include "n2np/node.h"
+//#include "n2np/relay.h"
+//#include "n2np/node.h"
 #include <list>
 
 namespace Modal
