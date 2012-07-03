@@ -77,7 +77,16 @@ namespace Modal
         lastRecvAddr = Address((const sockaddr *) &saddr);
         return bytes;
     }
-void UDPSocket::setBroadcast(bool enable) {
+    void UDPSocket::create() {
+            if (sock >= 0) {
+                // Do nothing, it already exists
+                return;
+            }
+            sock = ::socket(AF_INET, SOCK_DGRAM, 0);
+            if (sock == -1)
+                throw ErrException("UDPSocket", "socket");
+    }
+    void UDPSocket::setBroadcast(bool enable) {
         if (sock < 0) {
             this->create();
         }
