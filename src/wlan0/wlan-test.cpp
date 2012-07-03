@@ -1,7 +1,8 @@
 
 #include "initialisation.h"		/* Header */
 
-
-int main(int argc,char* argv[]){
-	return associate(argv[1]);
+namespace Modal{
+	int main(int argc,char* argv[]){
+		return Modal::associate(argv[1]);
+	}
 }
