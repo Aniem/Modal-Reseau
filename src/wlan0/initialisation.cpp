@@ -108,7 +108,7 @@ namespace Modal{
 	int associate(char* essid){
 		int s=sockets_open();
 		set_essid_info(s,"wlan0",&essid,1);
-		while(1);
+		//while(1);
 		return 0;
 	}
 }
