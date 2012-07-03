@@ -17,9 +17,11 @@ namespace Modal{
 			~wlan();
 			void recevons(void* buf, int size);
 			void send(void* data, int size,int port);
+			void sendToSomeone(void* data, int size,int port,std::string ip);
 			void run();
 			int quefaire(Modal::GTTPacket * gttpkt);
 			void sendBroadcast(GTTPacket* pkt,  int size,int port);
+			void sendUnicast(GTTPacket* pkt, int size,int port,std::string ip);
 		protected:
 			Modal::UDPSocket* skfd;
 			Modal::TunInterface *t;
