@@ -45,7 +45,7 @@ namespace Modal{
 		char* newdata=new char[size];
 		pkt->build(&newdata);
 		wlan::send(newdata,size,port);
-		delete newdata[];
+		delete[] newdata;
 	}
 	void wlan::recevons(void* data,int size){
 		skfd->recv(data,size);
