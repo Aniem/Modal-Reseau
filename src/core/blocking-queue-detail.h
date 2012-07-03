@@ -138,6 +138,10 @@ namespace Modal
         }
         return NULL;
     }
+    
+    template<typename T> bool BlockingQueue<T>::empty(){
+        return fifo.empty();
+    }
 }
 
 #endif /* MODAL_BLOCKING_QUEUE_DETAIL_H */

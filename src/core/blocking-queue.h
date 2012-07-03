@@ -125,6 +125,12 @@ namespace Modal
          * @return A copy of the content of the queue or NULL if the queue was closed or if it could not get the lock
          */
         std::deque<T*>* tryFlush();
+        
+        /**
+         * @brief Tells if the queue is empty or not.
+         * @return True if the queue is empty, False elsewise
+         */
+        bool empty();
 
         //Do not implement the following methods due to a lack of atomic operations
         //TODO: do it
