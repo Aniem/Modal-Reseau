@@ -100,7 +100,7 @@ namespace Modal {
         setMTU(1500);
         setIPv6address("wlan0");
         writer.setName("TunWriter");
-        writer.start();
+        //writer.start(); //Not useful to start.
         while(true){
             std::stringstream pkt;
             char data[1500];
@@ -118,18 +118,18 @@ namespace Modal {
                     pkt << " ";
             }
             log::info << "New packet received. size : " << s << log::endl << "data : " << pkt.str() << log::endl;
-            Address source = buildIPv6Address((unsigned char *)data+8);
-            Address dest = buildIPv6Address((unsigned char *)data+24);
+            std::string source = extractIPv6Address(data,8);
+            std::string dest = extractIPv6Address(data,24);
             GTTPacket * packet = new GTTPacket();
             packet->body = data;
             packet->protocol="MESH";
             packet->method="PKT";
-            packet->headers["Source"]=source.toString();
-            packet->headers["Destination"]=dest.toString();
+            packet->headers["Source"]=source;
+            packet->headers["Destination"]=dest;
             packet->size=s;
             packet->headers["Content-length"]=s;
             toRead.push(packet);
-            
+            log::debug << source << log::endl << dest << log::endl;
             /*char essai[4096];
             s = packet->build(&essai);
             std::string msg (essai,s);
@@ -141,7 +141,12 @@ namespace Modal {
     std::string TunInterface::extractIPv6Address(char* data, int pos){
         std::stringstream ip;
         for(int i = 0; i < 8; i++){
-            ip << HexDigit(data[pos+2*i])<<HexDigit(data[pos+2*i+1]);
+            char Hex[2];
+            CharToHex(data[pos+2*i],Hex);
+            ip << Hex[0]<<Hex[1];
+            CharToHex(data[pos+2*i+1],Hex);
+            ip << Hex[0]<<Hex[1];
+            
             if (i<7)
                 ip<<":";
         }

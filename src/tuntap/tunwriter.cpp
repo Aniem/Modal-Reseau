@@ -15,17 +15,17 @@ namespace Modal {
     }
 
     void TunWriter::addTask(GTTPacket * pkt){
-        toWrite.push(pkt);
+        ::write(fd,pkt->body,pkt->size);
     }
     void TunWriter::run(){
-        while(true){
+        /*while(true){
             if (!toWrite.empty()){
                 GTTPacket* pkt = toWrite.pop();
-                ::write(fd,pkt->body,pkt->size);
+                
             }else{
                 sleep(1);
             }
-        }
+        }// */
     }
     
 } // namespace Modal
