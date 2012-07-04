@@ -6,11 +6,13 @@
 #include "tunroutine.h"
 #include "../modRoute/modRoute.h"
 namespace Modal {
-    
+    class TunRoutine;    
     class wlanRoutine : public Thread
     {
         public:
             wlanRoutine(Address ipv6, unsigned short out_port, std::string devicename, TunRoutine &tunInt);
+/*            wlanRoutine(Address ipv6, unsigned short out_port, std::string devicename);
+            void giveTunRoutine(TunRoutine & tunInt);*/
             void run();
             void sendMsg(GTTPacket * pkt);
             
@@ -18,7 +20,7 @@ namespace Modal {
             Address ipv6Addr;
             wlan interface;
             unsigned short out_port;
-            TunRoutine tunInt;
+            TunRoutine & tunInt;
     };
     
 } // namespace Modal

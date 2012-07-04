@@ -8,13 +8,13 @@ namespace Modal {
     class TimeoutACK : public Thread
     {
         public:
-            TimeoutACK(int time, TunRoutine inter);
+            TimeoutACK(int time, TunRoutine &inter);
             void run();
             void acknowledge();
         private:
             int timeoutTime;
             bool ackreceived;
-            TunRoutine interface;
+            TunRoutine& interface;
             
     };
     

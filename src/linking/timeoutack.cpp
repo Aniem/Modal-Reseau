@@ -3,7 +3,7 @@
 
 namespace Modal {
     
-    TimeoutACK::TimeoutACK(int time, TunRoutine inter): timeoutTime(time), interface(inter)
+    TimeoutACK::TimeoutACK(int time, TunRoutine& inter): timeoutTime(time), interface(inter)
     {
     }
     void TimeoutACK::run(){

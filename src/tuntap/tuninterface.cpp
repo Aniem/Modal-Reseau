@@ -52,8 +52,7 @@ namespace Modal {
         return fd;
     }
 
-    TunInterface::TunInterface(char * dev)
-    {
+    TunInterface::TunInterface(char * dev){
         this->descriptor = openDevNetTun(dev);
         this->writer.setDescriptor(descriptor);
     }
@@ -96,10 +95,14 @@ namespace Modal {
        Hex[1]=HexDigit(c&0xF);
     }
     
+    Address TunInterface::getIPv6address(){
+        return this->myIPv6Address;
+    }
+    
     void TunInterface::run(){
         activate();
         setMTU(1500);
-        setIPv6address("wlan0");
+        myIPv6Address = setIPv6address("wlan0");
         writer.setName("TunWriter");
         //writer.start(); //Not useful to start.
         while(true){
