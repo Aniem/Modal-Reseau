@@ -6,10 +6,12 @@
 #define ACK 1
 #define NACK 5
 namespace Modal{
-	wlan::wlan(const std::string& ip, unsigned short port){
+	wlan::wlan(unsigned short port,std::string devicename){
 		this->skfd=new UDPSocket();
+        setsockopt(this->skfd->getFd(), SO_BINDTODEVICE, devicename.c_str(), devicename.size());
 		this->skfd->setBroadcast(1);
-		this->addr=new Address(ip,port,4);
+        this->addr=new Address("169.254.42.42",port,4); //random address, not useful
+        
 	}
 	wlan::~wlan(){
 		delete addr;

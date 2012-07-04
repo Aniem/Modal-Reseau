@@ -10,14 +10,14 @@
 #include "../modRoute/modRoute.h"
 //#include "../api.h"
 namespace Modal{
-	class wlan : public Thread {
+	class wlan {
 		public:
-			wlan(const std::string& ip, unsigned short port);
+			wlan(unsigned short port, std::string devicename);
 			~wlan();
 			GTTPacket * recevons(void* buf, int size);
 			void send(void* data, int size,int port);
 			void sendToSomeone(void* data, int size,int port,std::string ip);
-			void run();
+			//void run();
 			//int quefaire(Modal::GTTPacket * gttpkt);
 			void sendBroadcast(GTTPacket* pkt,  int size,int port);
 			void sendUnicast(GTTPacket* pkt, int size,int port,std::string ip);
