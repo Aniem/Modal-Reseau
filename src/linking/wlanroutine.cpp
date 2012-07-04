@@ -17,7 +17,7 @@ namespace Modal {
         while(true){
             char data[BIGSIZE];
             ModRoute modroute(this->ipv6Addr.toString());
-            GTTPacket* received = interface.recevons(data,BIGSIZE);
+            GTTPacket* received = interface.recevons(data,BIGSIZE*sizeof(char));
             if (received->method.find("RREQ")!=std::string::npos)
                 modroute.handleRouteRequest(received);
             if (received->method.find("RREP")!=std::string::npos)

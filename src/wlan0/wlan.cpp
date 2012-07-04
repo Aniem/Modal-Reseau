@@ -6,16 +6,17 @@
 #define ACK 1
 #define NACK 5
 namespace Modal{
-	wlan::wlan(unsigned short port,std::string devicename){
-		this->skfd=new UDPSocket();
-        setsockopt(this->skfd->getFd(),SOL_SOCKET, SO_BINDTODEVICE, devicename.c_str(), devicename.size());
-		this->skfd->setBroadcast(1);
+	wlan::wlan(unsigned short port,std::string devicename):skfd(){
+		//this->skfd=new UDPSocket();
+		skfd.create();
+        setsockopt(this->skfd.getFd(),SOL_SOCKET, SO_BINDTODEVICE, devicename.c_str(), devicename.size());
+		this->skfd.setBroadcast(1);
         this->addr=new Address("169.254.42.42",port,4); //random address, not useful
         
 	}
 	wlan::~wlan(){
 		delete addr;
-		delete skfd;
+		//delete skfd;
 	}
 	/*int wlan::quefaire(Modal::GTTPacket * gttpkt){
 		std::string s(gttpkt->method);
@@ -61,7 +62,7 @@ namespace Modal{
         Modal::GTTParser parser;
         Modal::GTTPacket *gttpkt = NULL;
         do{
-            skfd->recv(data,size);
+            skfd.recv(data,size);
             parser.eat((const char*)data, size);
 		}while((gttpkt= parser.getPacket())==NULL);
 		
@@ -76,7 +77,7 @@ namespace Modal{
 		that.sin_family = AF_INET;
 		that.sin_port = htons(port);
 		that.sin_addr.s_addr = INADDR_BROADCAST;
-		skfd->send(data,size,(struct sockaddr*)&that);
+		skfd.send(data,size,(struct sockaddr*)&that);
 	}
 
 	void wlan::sendToSomeone(void* data, int size,int port,std::string ip){
@@ -85,7 +86,7 @@ namespace Modal{
 		that.sin_family = AF_INET;
 		that.sin_port = htons(port);
 		that.sin_addr.s_addr = inet_addr(ip.c_str());
-		skfd->send(data,size,(struct sockaddr*)&that);
+		skfd.send(data,size,(struct sockaddr*)&that);
 	}
 
 

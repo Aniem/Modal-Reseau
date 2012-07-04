@@ -46,7 +46,7 @@ namespace Modal {
 		
         int seqnum = l->front();
 
-		l->erase(l->begin());
+		l->pop_front();
 
             pkt->headers["Seq"]=String::fromInt(seqnum);
             wlanInt->sendMsg(pkt);

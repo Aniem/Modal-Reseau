@@ -22,7 +22,7 @@ namespace Modal{
 			void sendBroadcast(GTTPacket* pkt,  int size,int port);
 			void sendUnicast(GTTPacket* pkt, int size,int port,std::string ip);
 		protected:
-			Modal::UDPSocket* skfd;
+			Modal::UDPSocket skfd;
 			Modal::TunInterface *t;
 			Modal::ModRoute *mod;
 			Modal::Address *addr;
