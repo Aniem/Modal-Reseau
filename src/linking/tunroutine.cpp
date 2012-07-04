@@ -22,7 +22,7 @@ namespace Modal {
         while (pkt = interface.receive()){
             std::string nexthop = ModRoute::getNextHop(pkt->headers["Destination"]);
             pkt->headers["NextHop"]=nexthop;
-		while(l.isEmpty)
+		while(l.isEmpty())
 			usleep(1000); //On attend qu'au moins un processus se libère
 		
             int seqnum = l.value(); //pick new seq number. This line has to change.
