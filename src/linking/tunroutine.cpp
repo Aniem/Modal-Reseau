@@ -1,5 +1,5 @@
 #include "tunroutine.h"
-
+#include "../modRoute/modRoute.h"
 #define PROCESS 42
 namespace Modal {
     
@@ -23,14 +23,13 @@ namespace Modal {
 		while(l->empty())
 			usleep(1000); //On attend qu'au moins un processus se libère
 		
-            int seqnum = l->value(); //pick new seq number. This line has to change.
+            int seqnum = l->value();
 
 		l.erase(l->begin());
 
             pkt->headers["Seq"]=String::fromInt(seqnum);
             wlanInt.sendMsg(pkt);
-            //Put here ACK/NACK timeout functionality. Start timeout Here
-		ack[seqnum]=new AckTime(seqnum,l);
+		ack[seqnum]=new AckTime(seqnum,l,pkt->headers["Destination"]);
 		ack[seqnum]->start();
         }
     }

@@ -4,7 +4,7 @@
 #include "../core/thread.h"
 #include "../wlan0/wlan.h"
 #include "tunroutine.h"
-
+#include "../modRoute/modRoute.h"
 namespace Modal {
     
     class wlanRoutine : public Thread

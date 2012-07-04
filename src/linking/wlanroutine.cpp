@@ -1,6 +1,5 @@
 #include "wlanroutine.h"
-#include "../wlan0/wlan.h"
-#include "../modRoute/modRoute.h"
+
 #define BIGSIZE 2048
 namespace Modal {
     

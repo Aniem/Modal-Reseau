@@ -4,11 +4,10 @@
 #include "../tuntap/tuninterface.h"
 #include "wlanroutine.h"
 #include "acktime.h"
-#include "../modRoute/modRoute.h"
 #include "../core/string.h"
 #include <unistd.h>
 #include <list>
-#include <map>
+//#include <map>
 
 namespace Modal {
     
