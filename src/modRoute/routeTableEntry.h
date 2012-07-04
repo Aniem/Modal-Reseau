@@ -2,6 +2,6 @@
 #define MODAL_TABLE_ENTRY
 struct RoutingTableEntry {
     std::string nextHop;
-    int expires;
+    long expires;
 };
 #endif /* MODAL_TABLE_ENTRY */

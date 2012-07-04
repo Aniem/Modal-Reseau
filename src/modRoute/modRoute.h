@@ -9,10 +9,6 @@
 #include "routeReqSender.h"
 #include "requestBuilder.h"
 
-// Utiliser unistd pour sleep ?
-// Qui gère les routesREQ .
-// Gestion des dates
-
 namespace Modal {
 
     class ModRoute {
@@ -24,9 +20,11 @@ namespace Modal {
 
         std::string buildRoute(const std::string ip);
 
-        void handleRouteReply(Modal::GTTPacket* pkt);
+        void handleRouteReply(GTTPacket* pkt);
 
-        void handleRouteRequest(Modal::GTTPacket* pkt);
+        void handleRouteRequest(GTTPacket* pkt);
+
+        void printRoutingTable();
 
     private:
         int defaultTTL;
