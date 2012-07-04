@@ -1,7 +1,7 @@
 #include "acktime.h"
 #define TIMEOUT 1000*1000
 namespace Modal{
-		AckTime::AckTime(int n, Modal::List* l){
+		AckTime::AckTime(int n, std::list<int>* l){
 			seq=n;
 			this->l=l;
 		}
@@ -10,7 +10,7 @@ namespace Modal{
 			if(!answer){
 				//SEND NACK
 			}
-			l=new List(seq,l);
+			l->insert(l->begin(),seq);
 			return;
 		}
 		void AckTime::recevoir(){

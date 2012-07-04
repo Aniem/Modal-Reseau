@@ -1,19 +1,17 @@
 #include "tunroutine.h"
-#include "../modRoute/modRoute.h
-#include "../core/string.h"
-#include <unistd.h>
+
 #define PROCESS 42
 namespace Modal {
     
     TunRoutine::TunRoutine(wlanRoutine routine) : wlanInt(routine)
     {
 	ack=new AckTime*[PROCESS];
-	this->l=new List();
-	initiate_l();
+	this->l=new std::list<int>()
+	TunRoutine::initiate_l();
     }
     Modal::List TunRoutine::initiate_l(){
 		for (int k=0; k<PROCESS;k++){
-			l=new List(k,l);
+			l->insert(l->begin(),k);
 		}
 		return (this->l=&l);
 	}
@@ -22,14 +20,12 @@ namespace Modal {
         while (pkt = interface.receive()){
             std::string nexthop = ModRoute::getNextHop(pkt->headers["Destination"]);
             pkt->headers["NextHop"]=nexthop;
-		while(l.isEmpty())
+		while(l->empty())
 			usleep(1000); //On attend qu'au moins un processus se libère
 		
-            int seqnum = l.value(); //pick new seq number. This line has to change.
+            int seqnum = l->value(); //pick new seq number. This line has to change.
 
-		Modal::List tmp=l.next();
-		delete l;
-		l=l.next();
+		l.erase(l->begin());
 
             pkt->headers["Seq"]=String::fromInt(seqnum);
             wlanInt.sendMsg(pkt);

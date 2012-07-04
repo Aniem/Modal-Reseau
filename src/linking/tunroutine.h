@@ -4,7 +4,10 @@
 #include "../tuntap/tuninterface.h"
 #include "wlanroutine.h"
 #include "acktime.h"
-#include "list.h"
+#include "../modRoute/modRoute.h"
+#include "../core/string.h"
+#include <unistd.h>
+#include <list>
 #include <map>
 
 namespace Modal {
@@ -15,12 +18,12 @@ namespace Modal {
             TunRoutine(wlanRoutine wlanR);
             void run();
             void write(GTTPacket * pkt);
-	    TunRoutine::initiate_l();
+	    void initiate_l();
         private :
             TunInterface interface;
             wlanRoutine wlanInt;
 		AckTime** ack;
-		List* l;
+		std::list<int> l;
 //            std::map<int,long> acktime;
     };
     
