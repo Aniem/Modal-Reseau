@@ -2,7 +2,7 @@
 #include <sstream>
 
 namespace Modal {
-    ModRoute::ModRoute(std::string ip) {
+     ModRoute::ModRoute(std::string ip) {
         this->routeValidityTime = 1000;
         this->defaultTTL = 10;
         this->myIP = ip;
@@ -34,13 +34,13 @@ namespace Modal {
             sender->increaseReqNumber();
         }
         else {
-            sender = new RouteReqSender(ip);
+            sender = new RouteReqSender(ip, this->myIP);
             sender->setName("RETR"+ip);
             (this->currentRequests).insert(std::pair<std::string, RouteReqSender*>(ip, sender));
             sender->start();
         }
 
-        while(sender->getStatus() == WAITING) {
+        while(sender->getStatus() == WAITING || sender->getStatus() == INIT) {
             usleep(100000);
         }
 
@@ -138,7 +138,6 @@ namespace Modal {
             //TODO someclass::sendBroadcast(requestBuilder::buildRREQ(requestedBy->second, targetIp->second, this->myIP(), --ttl));
         }
     }
-
 
     long ModRoute::getTimeMs() {
         struct timeval now;

@@ -5,12 +5,12 @@
 #include "routeTableEntry.h"
 
 namespace Modal {
-    enum RouteReqStatus {INIT, WAITING, FAILED, SUCCESS};
+     enum RouteReqStatus {INIT, WAITING, FAILED, SUCCESS};
 
     class RouteReqSender : public Thread {
 
     public:
-        RouteReqSender(std::string request);
+        RouteReqSender(std::string request, std::string myIP);
 
         void run();
 
@@ -30,6 +30,8 @@ namespace Modal {
         int numberOfRequests;
 
         std::string request;
+
+        std::string myIP;
 
         static int maxNumberOfTry;
 
