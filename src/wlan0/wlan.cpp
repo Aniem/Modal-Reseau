@@ -2,6 +2,9 @@
 #include <sstream>
 #define RREP 4 
 #define RREQ 3
+#define PKT 2
+#define ACK 1
+#define NACK 5
 namespace Modal{
 	wlan::wlan(Modal::TunInterface t,Modal::ModRoute mod,const std::string& ip, unsigned short port){
 		this->skfd=new UDPSocket();
@@ -26,18 +29,16 @@ namespace Modal{
 				return RREP;
 		}
 		else if(s.compare("PKT")==0){
-    	    std::map<std::string, std::string>::iterator sender = gttpkt->headers.find("Source");
-    	    std::map<std::string, std::string>::iterator replyTo = gttpkt->headers.find("Destination");
-			std::string s1(replyTo->second);
-			std::string s2(addr->getIp());
-			if(s1.compare(s2)==0){
-			//Envoyer au Tun/Tap
-			}
-
-				
-				
+				return PKT;
 		}
-		return 0;
+		else if(s.compare("ACK")==0){
+				return ACK;
+		}
+		else if(s.compare("NACK")==0){
+				return NACK;
+		}
+		else
+			return 0;
 	}
 	void wlan::sendBroadcast(GTTPacket* pkt, int size,int port){
 		char* newdata=new char[size];
