@@ -12,13 +12,13 @@
 namespace Modal{
 	class wlan : public Thread {
 		public:
-			wlan(Modal::TunInterface tun,Modal::ModRoute mod,const std::string& ip, unsigned short port);
+			wlan(Modal::TunInterface * tun ,Modal::ModRoute * mod,const std::string& ip, unsigned short port);
 			~wlan();
-			Modal::GTTPacket* recevons(void* buf, int size);
+			GTTPacket * recevons(void* buf, int size);
 			void send(void* data, int size,int port);
 			void sendToSomeone(void* data, int size,int port,std::string ip);
 			void run();
-			int quefaire(Modal::GTTPacket * gttpkt);
+			//int quefaire(Modal::GTTPacket * gttpkt);
 			void sendBroadcast(GTTPacket* pkt,  int size,int port);
 			void sendUnicast(GTTPacket* pkt, int size,int port,std::string ip);
 		protected:
