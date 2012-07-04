@@ -95,13 +95,12 @@ namespace Modal{
 	}
 	int sockets_open(void)
 		{
-		  int		sock;
+		  int sock;
+          sock = socket(AF_INET6, SOCK_DGRAM, 0);
+          if(sock >= 0)
+              return sock;
 
-		      sock = socket(AF_INET6, SOCK_DGRAM, 0);
-		      if(sock >= 0)
-			return sock;
-
-		  return -1;
+          return -1;
 		}
 
 

@@ -12,7 +12,7 @@
 namespace Modal{
 	class wlan : public Thread {
 		public:
-			wlan(Modal::TunInterface * tun ,Modal::ModRoute * mod,const std::string& ip, unsigned short port);
+			wlan(const std::string& ip, unsigned short port);
 			~wlan();
 			GTTPacket * recevons(void* buf, int size);
 			void send(void* data, int size,int port);

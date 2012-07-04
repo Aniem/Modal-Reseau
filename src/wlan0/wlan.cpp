@@ -6,12 +6,10 @@
 #define ACK 1
 #define NACK 5
 namespace Modal{
-	wlan::wlan(Modal::TunInterface *t,Modal::ModRoute* mod,const std::string& ip, unsigned short port){
+	wlan::wlan(const std::string& ip, unsigned short port){
 		this->skfd=new UDPSocket();
 		this->skfd->setBroadcast(1);
 		this->addr=new Address(ip,port,4);
-		this->mod=mod;
-		this->t=t;
 	}
 	wlan::~wlan(){
 		delete addr;
@@ -58,10 +56,11 @@ namespace Modal{
 	}
 
 	GTTPacket* wlan::recevons(void* data,int size){
-		skfd->recv(data,size);
-		Modal::GTTParser parser;
+        Modal::GTTParser parser;
         Modal::GTTPacket *gttpkt = NULL;
-        do{parser.eat((const char*)data, size);
+        do{
+            skfd->recv(data,size);
+            parser.eat((const char*)data, size);
 		}while((gttpkt= parser.getPacket())==NULL);
 		
 
