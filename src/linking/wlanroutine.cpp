@@ -4,7 +4,7 @@
 #define BIGSIZE 2048
 namespace Modal {
     
-    wlanRoutine::wlanRoutine(Address ipv6, unsigned short out_port, std::string devicename):ipv6Addr(ipv6), interface(out_port,devicename)
+    wlanRoutine::wlanRoutine(Address ipv6, unsigned short out_port, std::string devicename,TunRoutine & tunInt):ipv6Addr(ipv6), interface(out_port,devicename),out_port(out_port),tunInt(tunInt)
     {
     }
     void wlanRoutine::run(){
@@ -27,6 +27,10 @@ namespace Modal {
                 return; //give to TunRoutine
             
         }
+    }
+    void wlanRoutine::sendMsg(GTTPacket * pkt) {
+        interface.sendBroadcast(GTTPacket *pkt, 2048,out_port);
+        delete pkt;
     }
         
 } // namespace Modal

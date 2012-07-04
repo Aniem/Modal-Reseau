@@ -18,6 +18,7 @@
 
 #include "../core/exception.h"
 #include "ctlsocket.h"
+#include "../core/string.h"
 
 namespace Modal {
     
@@ -127,7 +128,7 @@ namespace Modal {
             packet->headers["Source"]=source;
             packet->headers["Destination"]=dest;
             packet->size=s;
-            packet->headers["Content-length"]=s;
+            packet->headers["Content-length"]=String::fromInt(s);
             toRead.push(packet);
             log::debug << source << log::endl << dest << log::endl;
             /*char essai[4096];
