@@ -18,11 +18,11 @@ namespace Modal{
 		std::string s(gttpkt->method);
 
 		if(s.compare("RREQ")==0){
-			mod->handleRouteRequest(gttpkt);
+			//mod->handleRouteRequest(gttpkt);
 				return RREQ;
 		}
 		else if(s.compare("RREP")==0){
-			mod->handleRouteReply(gttpkt);
+			//mod->handleRouteReply(gttpkt);
 				return RREP;
 		}
 		else if(s.compare("PKT")==0){
@@ -51,20 +51,15 @@ namespace Modal{
 		wlan::sendToSomeone(newdata,size,port,ip);
 		delete[] newdata;
 	}
-	void wlan::recevons(void* data,int size){
+	int wlan::recevons(void* data,int size){
 		skfd->recv(data,size);
 		Modal::GTTParser parser;
 		parser.eat((const char*)data, size);
 		Modal::GTTPacket *gttpkt= parser.getPacket();
 		
-		switch(wlan::quefaire(gttpkt)){
-
-			default:
-				//Modal::log::info <<"Le paquet arrivé ne peut être traité."<< Modal::log::endl;;
-				//On DROP
-				break;
-		}
+		int res=wlan::quefaire(gttpkt);
 		delete gttpkt;
+		return res;
 	}
 
 	void wlan::send(void* data, int size,int port){
