@@ -14,7 +14,7 @@ namespace Modal{
 		public:
 			wlan(Modal::TunInterface tun,Modal::ModRoute mod,const std::string& ip, unsigned short port);
 			~wlan();
-			int recevons(void* buf, int size);
+			Modal::GTTPacket* recevons(void* buf, int size);
 			void send(void* data, int size,int port);
 			void sendToSomeone(void* data, int size,int port,std::string ip);
 			void run();

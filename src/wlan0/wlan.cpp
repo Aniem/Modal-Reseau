@@ -52,15 +52,14 @@ namespace Modal{
 		wlan::sendToSomeone(newdata,size,port,ip);
 		delete[] newdata;
 	}
-	int wlan::recevons(void* data,int size){
+	Modal::GTTPacket* wlan::recevons(void* data,int size){
 		skfd->recv(data,size);
 		Modal::GTTParser parser;
 		parser.eat((const char*)data, size);
 		Modal::GTTPacket *gttpkt= parser.getPacket();
 		
 		int res=wlan::quefaire(gttpkt);
-		delete gttpkt;
-		return res;
+		return gttpkt;
 	}
 
 	void wlan::send(void* data, int size,int port){
