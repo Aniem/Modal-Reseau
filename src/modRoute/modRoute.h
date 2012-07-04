@@ -24,6 +24,8 @@ namespace Modal {
 
         void handleRouteRequest(GTTPacket* pkt);
 
+        void handleNACK(GTTPacket* pkt);
+
         void printRoutingTable();
 
     private:

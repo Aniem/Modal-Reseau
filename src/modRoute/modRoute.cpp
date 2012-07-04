@@ -139,6 +139,24 @@ namespace Modal {
         }
     }
 
+    void ModRoute::handleNACK(GTTPacket* pkt) {
+        std::map<std::string, std::string>::iterator from = pkt->headers.find("Source");
+        std::map<std::string, std::string>::iterator to = pkt->headers.find("Destination");
+        std::map<std::string, std::string>::iterator pktTarget = pkt->headers.find("NextHop");
+
+        if(from == pkt->headers.end() || to == pkt->headers.end() || pktTarget == pkt->headers.end()) return;
+
+        // Do nothing the packet is not for me
+        if(this->myIP.compare(pktTarget->second) != 0)  { std::cout << "Not addressed to me" << std::endl; return; }
+
+        this->routingTable.erase(from->second);
+
+        if(this->myIP.compare(to->second) != 0)  { 
+             //TODO : someclass::sendBroadcast(requestBuilder::buildNACK(from, to, this->getNextHop(to)));
+        }
+
+    }
+
     long ModRoute::getTimeMs() {
         struct timeval now;
 

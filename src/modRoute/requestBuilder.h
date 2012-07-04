@@ -8,9 +8,9 @@ namespace Modal {
     class RequestBuilder {
 
     public:
-	RequestBuilder();
     static GTTPacket* buildRREQ(std::string source, std::string dest, std::string sender, int ttl);
     static GTTPacket* buildRREP(std::string source, std::string dest, std::string sender, std::string nextHop, int ttl);
+    static GTTPacket* buildNACK(std::string source, std::string dest, std::string nextHop);
 
     private:
     static std::string fromInt(int i);
