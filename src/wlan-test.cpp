@@ -1,0 +1,6 @@
+
+#include "wlan0/initialisation.h"		/* Header */
+
+int main(int argc,char* argv[]){
+	return Modal::associate(argv[1]);
+}

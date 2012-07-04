@@ -74,9 +74,27 @@ add_executable(
     ${parser_sources}
     ${wlan_sources}
     ${linking_sources}
-    src/wlan0/wlan-test.cpp
+    ${tun_sources}
+    ${route_sources}
+    src/wlan-test.cpp
 )
 target_link_libraries(
     test-wlan0
     pthread
-    )
+)
+
+add_executable(
+    demo
+    ${core_sources}
+    ${net_sources}
+    ${parser_sources}
+    ${wlan_sources}
+    ${linking_sources}
+    ${tun_sources}
+    ${route_sources}
+    src/appli.cpp
+)
+target_link_libraries(
+    demo
+    pthread
+)
