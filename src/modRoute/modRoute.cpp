@@ -24,7 +24,7 @@ namespace Modal {
     }
 
     std::string ModRoute::buildRoute(std::string ip) {
-        RouteReqSender *sender;
+        RouteReqSender *sender = NULL;
         std::map<std::string, RouteReqSender*>::iterator itSender = (this->currentRequests).find(ip);
         if(itSender != (this->currentRequests).end()) {
             sender = itSender->second;
@@ -32,6 +32,7 @@ namespace Modal {
         }
         else {
             sender = new RouteReqSender(ip);
+            sender->setName("RETR"+ip);
             (this->currentRequests).insert(std::pair<std::string, RouteReqSender*>(ip, sender));
             sender->start();
         }
@@ -52,13 +53,13 @@ namespace Modal {
 
             std::map<std::string, RoutingTableEntry*>::iterator itRoute = (this->routingTable).find(ip);
             if(itRoute == (this->routingTable).end()) {
-                return NULL; // This should not happen, since we just got a response to our route request
+                return ""; // This should not happen, since we just got a response to our route request
             }
             else {
                 return itRoute->second->nextHop;
             }
         }
-        else return NULL;
+        else return "";
     }
 
 
