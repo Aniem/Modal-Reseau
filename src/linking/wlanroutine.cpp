@@ -18,10 +18,13 @@ namespace Modal {
                 ModRoute::handleNACK(received);
             if (received->method.find("PKT")!=std::string::npos)
                 if (received->headers["Destination"].find(ipv6Addr.toString()) != std::string::npos){
-			tun
                     return ; // Send to tuninterface
 		}
                 else if (received->headers["NextHop"].find(ipv6Addr.toString())!=std::string::npos){
+			
+			received->headers.erase["NextHop"];
+			received->headers.insert(std::pair<std::string,std::string>("NextHop",ModRoute::getNextHopt(received->headers.find("Destination")->second)));
+			wlanRoutine::sendMsg(received);
                     return; // Change nexthop, resend.
                 }
             if (received->method.find("ACK")!=std::string::npos && received->method.find("NACK")==std::string::npos)

@@ -14,15 +14,15 @@ namespace Modal {
     class TunRoutine : public Thread
     {
         public:
-            TunRoutine(wlanRoutine wlanR);
+            TunRoutine( Modal::wlanRoutine wlanR);
             void run();
             void write(GTTPacket * pkt);
 	    void initiate_l();
         private :
             TunInterface interface;
-            wlanRoutine wlanInt;
+            Modal::wlanRoutine wlanInt;
 		AckTime** ack;
-		std::list<int> l;
+		std::list<int>* l;
 //            std::map<int,long> acktime;
     };
     
