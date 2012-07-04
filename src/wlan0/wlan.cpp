@@ -8,7 +8,7 @@
 namespace Modal{
 	wlan::wlan(unsigned short port,std::string devicename){
 		this->skfd=new UDPSocket();
-        setsockopt(this->skfd->getFd(), SO_BINDTODEVICE, devicename.c_str(), devicename.size());
+        setsockopt(this->skfd->getFd(),SOL_SOCKET, SO_BINDTODEVICE, devicename.c_str(), devicename.size());
 		this->skfd->setBroadcast(1);
         this->addr=new Address("169.254.42.42",port,4); //random address, not useful
         
@@ -93,7 +93,4 @@ namespace Modal{
 		return true;
 	}
 
-	void wlan::run(){
-		
-	}
 }

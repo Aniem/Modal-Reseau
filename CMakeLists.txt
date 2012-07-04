@@ -47,6 +47,11 @@ file(
     src/wlan0/*
 )
 
+file(
+    GLOB_RECURSE
+    linking_sources
+    src/linking/*
+    )
 # Test executables
 
 add_executable(
@@ -68,6 +73,7 @@ add_executable(
     ${net_sources}
     ${parser_sources}
     ${wlan_sources}
+    ${linking_sources}
     src/wlan0/wlan-test.cpp
 )
 target_link_libraries(

@@ -4,7 +4,7 @@
 #define BIGSIZE 2048
 namespace Modal {
     
-    wlanRoutine::wlanRoutine(Address ipv6, unsigned short out_port, std::string devicename,TunRoutine & tunInt):ipv6Addr(ipv6), interface(out_port,devicename),out_port(out_port),tunInt(tunInt)
+    wlanRoutine::wlanRoutine(Address ipv6, unsigned short out_port, std::string devicename,TunRoutine & tunInt):ipv6Addr(ipv6), interface(out_port,devicename),out_port(out_port),TunInt(tunInt)
     {
     }
     void wlanRoutine::run(){
@@ -18,8 +18,10 @@ namespace Modal {
             if (received->method.find("NACK")!=std::string::npos)
                 ModRoute::handleNACK(received);
             if (received->method.find("PKT")!=std::string::npos)
-                if (received->headers["Destination"].find(ipv6Addr.toString()) != std::string::npos)
+                if (received->headers["Destination"].find(ipv6Addr.toString()) != std::string::npos){
+			tun
                     return ; // Send to tuninterface
+		}
                 else if (received->headers["NextHop"].find(ipv6Addr.toString())!=std::string::npos){
                     return; // Change nexthop, resend.
                 }
