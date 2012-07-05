@@ -10,7 +10,7 @@
 #include "../tuntap/tuninterface.h"
 #include "../parser/gttpacket.h"
 #include "../parser/gttparser.h"
-#include "../modRoute/modRoute.h"
+//#include "../modRoute/modRoute.h"
 //#include "../api.h"
 namespace Modal{
 	class wlan {
@@ -26,8 +26,8 @@ namespace Modal{
 			void sendUnicast(GTTPacket* pkt, int size,int port,std::string ip);
 		protected:
 			Modal::UDPSocket skfd;
-			Modal::TunInterface *t;
-			Modal::ModRoute *mod;
+			/*Modal::TunInterface *t;
+			Modal::ModRoute *mod;*/
 			Modal::Address *addr;
 	};
 }

@@ -1,4 +1,4 @@
-
+0
 #include "wlan0/initialisation.h"
 #include "tuntap/tuninterface.h"
 #include "core/common.h"
@@ -18,7 +18,7 @@ int main(int argc, char* argv[]){
     log::init(log::CONSOLE, "");
     Socket::init();
     
-    TunRoutine tunR;
+    TunRoutine tunR(1337);
     wlanRoutine wlanR(tunR.getIPv6Address(),1337,"wlan0",tunR);
     tunR.giveWlanRoutine(&wlanR);
     

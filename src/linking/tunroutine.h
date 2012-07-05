@@ -14,8 +14,8 @@ namespace Modal {
     class TunRoutine : public Thread
     {
         public:
-            TunRoutine(wlanRoutine  * wlanR);
-            TunRoutine();
+            TunRoutine(wlanRoutine  * wlanR, unsigned short out_port);
+            TunRoutine(unsigned short out_port);
             void giveWlanRoutine(wlanRoutine * wlanR);
             Address getIPv6Address();
             void run();
@@ -23,6 +23,7 @@ namespace Modal {
             void initiate_l();
             void receiveAck(GTTPacket *pkt);
         private :
+	    unsigned short out_port;
             TunInterface interface;
             Modal::wlanRoutine * wlanInt;
             AckTime** ack;
