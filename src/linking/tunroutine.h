@@ -5,6 +5,7 @@
 #include "wlanroutine.h"
 #include "acktime.h"
 #include "../core/string.h"
+#include "../core/log.h"
 #include <unistd.h>
 #include "list.h"
 //#include <map>
@@ -23,9 +24,9 @@ namespace Modal {
             void initiate_l();
             void receiveAck(GTTPacket *pkt);
         private :
-	    unsigned short out_port;
-            TunInterface interface;
+            unsigned short out_port;
             Modal::wlanRoutine * wlanInt;
+            TunInterface interface;
             AckTime** ack;
             std::list<int>* l;
             Address ipv6Addr;

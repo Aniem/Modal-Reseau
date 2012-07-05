@@ -4,6 +4,7 @@
 #include "../core/thread.h"
 #include "routeTableEntry.h"
 #include "../wlan0/wlan.h"
+#include "requestBuilder.h"
 
 namespace Modal {
      enum RouteReqStatus {INIT, WAITING, FAILED, SUCCESS};

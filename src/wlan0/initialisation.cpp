@@ -146,7 +146,6 @@ set_mode_info(int		skfd,
 		char* mode="Ad-Hoc";
 		set_mode_info(s,"wlan0",&mode,1);
 		set_essid_info(s,"wlan0",&essid,1);
-		while(1);
 		return 0;
 	}
 }

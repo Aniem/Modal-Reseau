@@ -2,7 +2,7 @@
 #include <sstream>
 
 namespace Modal {
-     ModRoute::ModRoute(std::string ip, wlan w, unsigned short port) {
+     ModRoute::ModRoute(std::string ip, wlan * w, unsigned short port) {
         this->routeValidityTime = 1000;
         this->defaultTTL = 10;
         this->myIP = ip;
@@ -98,7 +98,7 @@ namespace Modal {
 
         if(replyTo->second.compare(this->myIP) != 0) {
             // The RREQ is not for me -> transmit the RREP
-            this->w->sendBroadcast(requestBuilder::buildRREP(sender->second, replyTo->second, this->myIP, this->getNextHop(replyTo->second), --ttl), 2048, this->port);
+            this->w->sendBroadcast(RequestBuilder::buildRREP(sender->second, replyTo->second, this->myIP, this->getNextHop(replyTo->second), --ttl), 2048, this->port);
         } else {
              std::map<std::string, RouteReqSender*>::iterator itSender = (this->currentRequests).find(sender->second);
              if(itSender != (this->currentRequests).end()) {
@@ -133,11 +133,11 @@ namespace Modal {
             
         if(targetIP->second.compare(this->myIP) == 0) {
             // The RREQ is for me -> answer with a RREP
-            this->w->sendBroadcast(requestBuilder::buildRREP(this->myIP, requestedBy->second, this->myIP, nextHopToRequester->second, this->defaultTTL), 2048, this->port);
+            this->w->sendBroadcast(RequestBuilder::buildRREP(this->myIP, requestedBy->second, this->myIP, nextHopToRequester->second, this->defaultTTL), 2048, this->port);
         }
         else {
             // The RREQ is not for me -> broadcast it with a smaller ttl
-            this->w->sendBroadcast(requestBuilder::buildRREQ(requestedBy->second, targetIp->second, this->myIP(), --ttl), 2048, this->port);
+            this->w->sendBroadcast(RequestBuilder::buildRREQ(requestedBy->second, targetIP->second, this->myIP, --ttl), 2048, this->port);
         }
     }
 
@@ -154,7 +154,7 @@ namespace Modal {
         this->routingTable.erase(from->second);
 
         if(this->myIP.compare(to->second) != 0)  { 
-             //TODO : someclass::sendBroadcast(requestBuilder::buildNACK(from, to, this->getNextHop(to)), 2048, this->port);
+             this->w->sendBroadcast(RequestBuilder::buildNACK(from->second, to->second, this->getNextHop(to->second)), 2048, this->port);
         }
 
     }

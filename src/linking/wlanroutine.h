@@ -2,6 +2,7 @@
 #define MODAL_WLANROUTINE_H
 #include "../net/address.h"
 #include "../core/thread.h"
+#include "../core/log.h"
 #include "../wlan0/wlan.h"
 #include "tunroutine.h"
 #include "../modRoute/modRoute.h"

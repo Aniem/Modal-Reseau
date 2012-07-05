@@ -36,7 +36,7 @@ namespace Modal {
         //std::cout << "Attempting to retrieve nextHop for " << this->request << std::endl;
 
         while(this->currentStatus == WAITING) {
-            this->w->sendRequest(requestBuilder::buildRREQ(this->myIP, this->myIP, this->request, 10), 2048, this->port);
+            this->w->sendBroadcast(RequestBuilder::buildRREQ(this->myIP, this->myIP, this->request, 10), 2048, this->port);
             this->numberOfTry++;
             //std::cout << "Attempt "<< this->numberOfTry <<" / " << RouteReqSender::maxNumberOfTry << " for " << this->request << std::endl;
             usleep(this->attemptTime);

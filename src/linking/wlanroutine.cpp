@@ -19,10 +19,12 @@ namespace Modal {
     }*/
 
     void wlanRoutine::run(){
+        log::debug << "wlan Routine Started" << log::endl;
         while(true){
             char data[BIGSIZE];
             ModRoute modroute(this->ipv6Addr.toString(),interface,out_port);
             GTTPacket* received = interface->recevons(data,BIGSIZE*sizeof(char));
+            log::debug << "new packet received from wlan interface" << log::endl;
             if (received->method.find("RREQ")!=std::string::npos)
                 modroute.handleRouteRequest(received);
             if (received->method.find("RREP")!=std::string::npos)
@@ -40,7 +42,7 @@ namespace Modal {
                 }
             }
             if (received->method.find("ACK")!=std::string::npos && received->method.find("NACK")==std::string::npos)
-                return; //give to TunRoutine
+                tunInt.receiveAck(received); //give to TunRoutine
             
         }
     }
