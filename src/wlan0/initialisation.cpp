@@ -15,6 +15,7 @@
 
 namespace Modal{
 	static int errmax;
+	static int errarg;
 	int	set_essid_info(int skfd,	 char *ifname,  char *	args[],	  int	count)	
 	{
 	  struct iwreq		wrq;
@@ -102,12 +103,50 @@ namespace Modal{
 
           return -1;
 		}
+/*
+ * Set Mode
+ */
+static int
+set_mode_info(int		skfd,
+	      char *		ifname,
+	      char *		args[],		/* Command line args */
+	      int		count)		/* Args count */
+{
+  struct iwreq		wrq;
+  unsigned int		k;		/* Must be unsigned */
 
+  /* Avoid "Unused parameter" warning */
+  count = count;
+
+  /* Check if it is a uint, otherwise get is as a string */
+  if(sscanf(args[0], "%i", &k) != 1)
+    {
+      k = 0;
+      while((k < IW_NUM_OPER_MODE) &&
+	    strncasecmp(args[0], iw_operation_mode[k], 3))
+	k++;
+    }
+  if(k >= IW_NUM_OPER_MODE)
+    {
+      errarg = 0;
+      return(IWERR_ARG_TYPE);
+    }
+
+  wrq.u.mode = k;
+  if(iw_set_ext(skfd, ifname, SIOCSIWMODE, &wrq) < 0)
+    return(IWERR_SET_EXT);
+
+  /* 1 arg */
+  return(1);
+}
 
 	int associate(char* essid){
 		int s=sockets_open();
+
+		char* mode="Ad-Hoc";
+		set_mode_info(s,"wlan0",&mode,1);
 		set_essid_info(s,"wlan0",&essid,1);
-		//while(1);
+		while(1);
 		return 0;
 	}
 }
