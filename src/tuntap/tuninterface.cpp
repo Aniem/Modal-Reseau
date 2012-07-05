@@ -105,7 +105,7 @@ namespace Modal {
         myIPv6Address = setIPv6address("wlan0");
         writer.setName("TunWriter");
         //writer.start(); //Not useful to start.
-        while(true){
+        /*while(true){
             std::stringstream pkt;
             char data[1500];
             int s = this->read(data,1500);
@@ -134,11 +134,7 @@ namespace Modal {
             packet->headers["Content-length"]=String::fromInt(s);
             toRead.push(packet);
             log::debug << source << log::endl << dest << log::endl;
-            /*char essai[4096];
-            s = packet->build(&essai);
-            std::string msg (essai,s);
-            log::debug << msg << log::endl; // */
-        }
+        }// */
         
     }
     
@@ -161,7 +157,36 @@ namespace Modal {
         this->writer.addTask(pkt);
     }
     GTTPacket* TunInterface::receive(){
-        return toRead.pop();
+        //return toRead.pop();
+        std::stringstream pkt;
+        char data[1500];
+        int s = this->read(data,1500);
+        //TODO : read data, encapsulate to a GTT PKT packet
+        // extract source and dst IPv6 address.
+        pkt << std::string(data,s) << std::endl << "Hex : " << std::endl;
+        for (int i = 0; i < s; i++){
+            char hexD[2];
+            CharToHex(data[i],hexD);
+            pkt << hexD[0] << hexD[1];
+            if (i%4==3)
+                pkt << std::endl;
+            else
+                pkt << " ";
+        }
+        log::info << "New packet received. size : " << s << log::endl << "data : " << pkt.str() << log::endl;
+        std::string source = extractIPv6Address(data,8);
+        std::string dest = extractIPv6Address(data,24);
+        GTTPacket * packet = new GTTPacket();
+        packet->body = data;
+        packet->protocol="MESH";
+        packet->method="PKT";
+        packet->headers["Source"]=source;
+        packet->headers["Destination"]=dest;
+        packet->size=s;
+        packet->headers["Content-length"]=String::fromInt(s);
+        log::debug << source << log::endl << dest << log::endl;
+        log::flush();
+        return packet;
     }
     
     Address TunInterface::buildIPv6Address(const unsigned char hwaddr[6]){

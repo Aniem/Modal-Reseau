@@ -3,9 +3,14 @@
 #define BIGSIZE 2048
 namespace Modal {
     
-    wlanRoutine::wlanRoutine(Address ipv6, unsigned short out_port, std::string devicename,TunRoutine & tunInt):ipv6Addr(ipv6), interface(out_port,devicename),out_port(out_port),tunInt(tunInt)
+    wlanRoutine::wlanRoutine(Address ipv6, unsigned short out_port, std::string devicename,TunRoutine & tunInt):ipv6Addr(ipv6), out_port(out_port),tunInt(tunInt)
     {
+        interface = new wlan(out_port,devicename);
     }
+    wlanRoutine::~wlanRoutine(){
+        delete interface;
+    }
+
 /*    wlanRoutine::wlanRoutine(Address ipv6, unsigned short out_port, std::string devicename):ipv6Addr(ipv6), interface(out_port,devicename),out_port(out_port)
     {
     }
@@ -16,7 +21,7 @@ namespace Modal {
     void wlanRoutine::run(){
         while(true){
             char data[BIGSIZE];
-            ModRoute modroute(this->ipv6Addr.toString());
+            ModRoute modroute(this->ipv6Addr.toString(),interface,out_port);
             GTTPacket* received = interface.recevons(data,BIGSIZE*sizeof(char));
             if (received->method.find("RREQ")!=std::string::npos)
                 modroute.handleRouteRequest(received);

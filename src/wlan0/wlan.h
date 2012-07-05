@@ -1,3 +1,6 @@
+#ifndef MODAL_WLAN
+#define MODAL_WLAN
+
 #include <iostream>
 #include <string>
 #include <strings.h>
@@ -28,3 +31,5 @@ namespace Modal{
 			Modal::Address *addr;
 	};
 }
+
+#endif
