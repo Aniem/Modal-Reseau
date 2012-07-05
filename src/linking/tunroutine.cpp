@@ -3,7 +3,7 @@
 #define PROCESS 42
 namespace Modal {
     
-    TunRoutine::TunRoutine(wlanRoutine *routine) : interface("tun0"), wlanInt(routine)
+    TunRoutine::TunRoutine(wlanRoutine *routine, unsigned short out_port) : interface("tun9"), wlanInt(routine), out_port(out_port)
     {
         //this->wlanInt = routine;
         ipv6Addr = interface.getIPv6address();
@@ -11,7 +11,7 @@ namespace Modal {
         this->l=new std::list<int>();
         TunRoutine::initiate_l();
     }
-    TunRoutine::TunRoutine() : interface("tun9")
+    TunRoutine::TunRoutine(unsigned short out_port) : interface("tun9"), out_port(out_port)
        {
            //this->wlanInt = routine;
            ipv6Addr = interface.getIPv6address();
@@ -38,7 +38,7 @@ namespace Modal {
        
         while (true){
             pkt = interface.receive();
-            ModRoute modroute(ipv6Addr.toString());
+            ModRoute modroute(ipv6Addr.toString(),wlanInt, out_port);
             std::string nexthop = modroute.getNextHop(pkt->headers["Destination"]);
             pkt->headers["NextHop"]=nexthop;
 		while(l->empty())

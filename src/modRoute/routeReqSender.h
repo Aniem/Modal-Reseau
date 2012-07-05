@@ -3,6 +3,7 @@
 #include <sstream>
 #include "../core/thread.h"
 #include "routeTableEntry.h"
+#include "../wlan0/wlan.h"
 
 namespace Modal {
      enum RouteReqStatus {INIT, WAITING, FAILED, SUCCESS};
@@ -10,7 +11,7 @@ namespace Modal {
     class RouteReqSender : public Thread {
 
     public:
-        RouteReqSender(std::string request, std::string myIP);
+        RouteReqSender(std::string request, std::string myIP, wlan* w, unsigned short port);
 
         void run();
 
@@ -27,6 +28,10 @@ namespace Modal {
         int getNumberOfRequests();
 
     private:
+        wlan* w;
+ 
+        unsigned short port;
+
         int numberOfRequests;
 
         std::string request;

@@ -8,13 +8,14 @@
 #include "routeTableEntry.h"
 #include "routeReqSender.h"
 #include "requestBuilder.h"
+#include "../wlan0/wlan.h"
 
 namespace Modal {
 
     class ModRoute {
 
     public:
-        ModRoute(const std::string ip);
+        ModRoute(const std::string ip, wlan* w, unsigned short port);
 
         std::string getNextHop(const std::string ip);
 
@@ -29,6 +30,10 @@ namespace Modal {
         void printRoutingTable();
 
     private:
+        wlan* w;
+
+        unsigned short port;
+
         int defaultTTL;
 
         std::string myIP;
