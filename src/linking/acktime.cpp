@@ -1,15 +1,25 @@
+
 #include "acktime.h"
-#define TIMEOUT 1000*1000
+#define TIMEOUT 1000*100
 namespace Modal{
-		AckTime::AckTime(int n, std::list<int>* l,std::string dest){
+		AckTime::AckTime(int n, std::list<int>* l,std::string dest,std::string src){
 			seq=n;
 			this->l=l;
 			s = new std::string(dest);
+			this->src=new std::string(src);
 		}
+		void AckTime::sendNACK(){
+			GTTPacket *pkt=RequestBuilder::buildNACK(*src,*s,ModRoute::getNextHop(*s));
+			char* newdata=new char[2048];
+			pkt->build(&newdata);
+			wlan::send(newdata,2048,1337);
+			delete[] newdata;
+			delete pkt;
+}
 		void AckTime::run(){
 			usleep(TIMEOUT);
 			if(!answer){
-				//SEND NACK
+				AckTime::sendNACK();
 			}
 			l->insert(l->begin(),seq);
 			return;
@@ -18,3 +28,4 @@ namespace Modal{
 			answer=true;
 		}
 }
+
