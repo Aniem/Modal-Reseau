@@ -1,4 +1,5 @@
 
+#include "wlan0/initialisation.h"
 #include "tuntap/tuninterface.h"
 #include "core/common.h"
 #include "core/atom/counter.h"
@@ -21,6 +22,8 @@ int main(int argc, char* argv[]){
     wlanRoutine wlanR(tunR.getIPv6Address(),1337,"wlan0",tunR);
     tunR.giveWlanRoutine(&wlanR);
     
+    associate("modal");
+    
     tunR.setName("TunRoutine");
     wlanR.setName("WlanRoutine");
     try{
@@ -29,5 +32,5 @@ int main(int argc, char* argv[]){
     }catch(Exception e){
         Modal::log::fatal << e << Modal::log::endl;
         log::flushAndQuit();
-    }
+    } //*/
 }
