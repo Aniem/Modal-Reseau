@@ -22,7 +22,7 @@ namespace Modal {
         while(true){
             char data[BIGSIZE];
             ModRoute modroute(this->ipv6Addr.toString(),interface,out_port);
-            GTTPacket* received = interface.recevons(data,BIGSIZE*sizeof(char));
+            GTTPacket* received = interface->recevons(data,BIGSIZE*sizeof(char));
             if (received->method.find("RREQ")!=std::string::npos)
                 modroute.handleRouteRequest(received);
             if (received->method.find("RREP")!=std::string::npos)
@@ -45,8 +45,11 @@ namespace Modal {
         }
     }
     void wlanRoutine::sendMsg(GTTPacket * pkt) {
-        interface.sendBroadcast(pkt, 2048,out_port);
+        interface->sendBroadcast(pkt, 2048,out_port);
         delete pkt;
+    }
+    wlan * wlanRoutine::getWlanInterface(){
+        return interface;
     }
         
 } // namespace Modal

@@ -14,6 +14,7 @@ namespace Modal {
 /*            wlanRoutine(Address ipv6, unsigned short out_port, std::string devicename);
             void giveTunRoutine(TunRoutine & tunInt);*/
             void run();
+            wlan * getWlanInterface();
             ~wlanRoutine();
             void sendMsg(GTTPacket * pkt);
             

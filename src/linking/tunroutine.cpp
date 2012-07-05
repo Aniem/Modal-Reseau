@@ -38,7 +38,7 @@ namespace Modal {
        
         while (true){
             pkt = interface.receive();
-            ModRoute modroute(ipv6Addr.toString(),wlanInt, out_port);
+            ModRoute modroute(ipv6Addr.toString(),wlanInt->getWlanInterface(), out_port);
             std::string nexthop = modroute.getNextHop(pkt->headers["Destination"]);
             pkt->headers["NextHop"]=nexthop;
 		while(l->empty())
