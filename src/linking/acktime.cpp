@@ -9,12 +9,12 @@ namespace Modal{
 			this->src=new std::string(src);
 		}
 		void AckTime::sendNACK(){
-			GTTPacket *pkt=RequestBuilder::buildNACK(*src,*s,ModRoute::getNextHop(*s));
+			/*GTTPacket *pkt=RequestBuilder::buildNACK(*src,*s,ModRoute::getNextHop(*s));
 			char* newdata=new char[2048];
 			pkt->build(&newdata);
 			wlan::send(newdata,2048,1337);
 			delete[] newdata;
-			delete pkt;
+			delete pkt;*/
 }
 		void AckTime::run(){
 			usleep(TIMEOUT);

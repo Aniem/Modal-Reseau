@@ -42,8 +42,16 @@ namespace Modal {
                 }
             }
             if (received->method.find("ACK")!=std::string::npos && received->method.find("NACK")==std::string::npos)
-                tunInt.receiveAck(received); //give to TunRoutine
-            
+            {
+                    if (received->headers["Destination"].find(ipv6Addr.toString()) != std::string::npos){
+                        return ; // Send to tuninterface
+                    }
+                    else if (received->headers["NextHop"].find(ipv6Addr.toString())!=std::string::npos){
+                        received->headers["NextHop"]=modroute.getNextHop(received->headers["Destination"]);
+                        wlanRoutine::sendMsg(received);
+                        return; // Change nexthop, resend.
+                    }
+            }
         }
     }
     void wlanRoutine::sendMsg(GTTPacket * pkt) {

@@ -41,9 +41,12 @@ namespace Modal {
         interface.start();
         log::debug << "Tun Interface Started" << log::endl;
         GTTPacket * pkt;
-       
+        int count=0;
         while (true){
             pkt = interface.receive();
+            count++;
+            if (count <= 2)
+                continue;
             log::debug << "New packet Received" << log::endl;
             ModRoute modroute(ipv6Addr.toString(),wlanInt->getWlanInterface(), out_port);
             std::string nexthop = modroute.getNextHop(pkt->headers["Destination"]);
@@ -57,7 +60,7 @@ namespace Modal {
 
             pkt->headers["Seq"]=String::fromInt(seqnum);
             wlanInt->sendMsg(pkt);
-            ack[seqnum]=new AckTime(seqnum,l,pkt->headers["Destination"]);
+            ack[seqnum]=new AckTime(seqnum,l,pkt->headers["Destination"],pkt->headers["Source"]);
             ack[seqnum]->start();
         }
     }

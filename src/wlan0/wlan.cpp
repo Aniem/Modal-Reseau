@@ -1,4 +1,5 @@
 #include "wlan.h"
+#include "../core/log.h"
 #include <sstream>
 #define RREP 4 
 #define RREQ 3
@@ -47,8 +48,8 @@ namespace Modal{
 	} // */
 	void wlan::sendBroadcast(GTTPacket* pkt, int size,unsigned short port){
 		char* newdata=new char[size];
-		pkt->build(&newdata);
-		wlan::send(newdata,size,port);
+        int s = (int) pkt->build(&newdata);
+		send(newdata,s,port);
 		delete[] newdata;
 	}
 	void wlan::sendUnicast(GTTPacket* pkt, int size,unsigned short port,std::string ip){
@@ -77,7 +78,11 @@ namespace Modal{
 		that.sin_family = AF_INET;
 		that.sin_port = htons(port);
 		that.sin_addr.s_addr = INADDR_BROADCAST;
-		skfd.send(data,size,(struct sockaddr*)&that);
+        try{
+            skfd.send(data,size,(struct sockaddr*)&that);
+        }catch(Exception e){
+            log::fatal << e << log::endl;
+        }
 	}
 
 	void wlan::sendToSomeone(void* data, int size,unsigned short port,std::string ip){

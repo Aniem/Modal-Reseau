@@ -27,7 +27,8 @@ namespace Modal
                 throw ErrException("UDPSocket", "socket");
         }
         address.getSockAddr((struct sockaddr *) &saddr);
-        bytes = ::sendto(this->sock, data, size, 0, (const struct sockaddr *) &saddr, sizeof (saddr));
+        //bytes = ::sendto(this->sock, data, size, 0, (const struct sockaddr *) &saddr, sizeof (saddr));
+        bytes = ::send(this->sock, data, size, 0);
         if (localAddress.empty())
             this->updateLocalAddress();
         // TODO: Implement status error (ex. Conn closed, ...)
