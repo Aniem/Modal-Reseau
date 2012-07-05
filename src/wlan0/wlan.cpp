@@ -45,13 +45,13 @@ namespace Modal{
 
 		return 0;
 	} // */
-	void wlan::sendBroadcast(GTTPacket* pkt, int size,int port){
+	void wlan::sendBroadcast(GTTPacket* pkt, int size,unsigned short port){
 		char* newdata=new char[size];
 		pkt->build(&newdata);
 		wlan::send(newdata,size,port);
 		delete[] newdata;
 	}
-	void wlan::sendUnicast(GTTPacket* pkt, int size,int port,std::string ip){
+	void wlan::sendUnicast(GTTPacket* pkt, int size,unsigned short port,std::string ip){
 		char* newdata=new char[size];
 		pkt->build(&newdata);
 		wlan::sendToSomeone(newdata,size,port,ip);
@@ -71,7 +71,7 @@ namespace Modal{
 		return gttpkt;
 	}
 
-	void wlan::send(void* data, int size,int port){
+	void wlan::send(void* data, int size,unsigned short port){
 		struct sockaddr_in that;
 		bzero(&that,sizeof(that));
 		that.sin_family = AF_INET;
@@ -80,7 +80,7 @@ namespace Modal{
 		skfd.send(data,size,(struct sockaddr*)&that);
 	}
 
-	void wlan::sendToSomeone(void* data, int size,int port,std::string ip){
+	void wlan::sendToSomeone(void* data, int size,unsigned short port,std::string ip){
 		struct sockaddr_in that;
 		bzero(&that,sizeof(that));
 		that.sin_family = AF_INET;

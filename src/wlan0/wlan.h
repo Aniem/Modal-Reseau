@@ -18,12 +18,12 @@ namespace Modal{
 			wlan(unsigned short port, std::string devicename);
 			~wlan();
 			GTTPacket * recevons(void* buf, int size);
-			void send(void* data, int size,int port);
-			void sendToSomeone(void* data, int size,int port,std::string ip);
+			void send(void* data, int size,unsigned short port);
+			void sendToSomeone(void* data, int size,unsigned short port,std::string ip);
 			//void run();
 			//int quefaire(Modal::GTTPacket * gttpkt);
-			void sendBroadcast(GTTPacket* pkt,  int size,int port);
-			void sendUnicast(GTTPacket* pkt, int size,int port,std::string ip);
+			void sendBroadcast(GTTPacket* pkt,  int size,unsigned short port);
+			void sendUnicast(GTTPacket* pkt, int size,unsigned short port,std::string ip);
 		protected:
 			Modal::UDPSocket skfd;
 			Modal::TunInterface *t;
