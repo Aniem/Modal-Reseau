@@ -21,7 +21,7 @@ namespace Modal {
     void wlanRoutine::run(){
         while(true){
             char data[BIGSIZE];
-            ModRoute modroute(this->ipv6Addr.toString(),interface);
+            ModRoute modroute(this->ipv6Addr.toString(),interface,out_port);
             GTTPacket* received = interface.recevons(data,BIGSIZE*sizeof(char));
             if (received->method.find("RREQ")!=std::string::npos)
                 modroute.handleRouteRequest(received);
